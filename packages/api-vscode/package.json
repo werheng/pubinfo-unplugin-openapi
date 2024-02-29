@@ -1,0 +1,12 @@
+{
+  "name": "@pubinfo/api-vscode",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Werheng <werheng.zhang@gmail.com>",
+  "license": "MIT",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
