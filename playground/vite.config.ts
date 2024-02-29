@@ -13,13 +13,14 @@ export default defineConfig({
     Vue(),
     Inspect(),
     OpenAPI({
+      imports: 'import request from \'../../index\'',
       input: [
         join(__dirname, './scripts/openapi-example-files/swagger-simple.json'),
         join(__dirname, './scripts/openapi-example-files/swagger-get-method-params-convert-obj.json'),
       ],
       output: [
-        './api/swagger-simple',
-        './api/swagger-get-method-params-convert-obj',
+        './api/modules/swagger-simple',
+        './api/modules/swagger-get-method-params-convert-obj',
       ],
       watch: false,
       dts: './api/openapi.d.ts',

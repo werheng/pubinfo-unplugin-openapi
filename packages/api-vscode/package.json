@@ -1,5 +1,6 @@
 {
   "name": "@pubinfo/api-vscode",
+  "type": "module",
   "version": "0.0.0",
   "description": "",
   "author": "Werheng <werheng.zhang@gmail.com>",
