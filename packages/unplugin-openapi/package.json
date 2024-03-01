@@ -5,7 +5,13 @@
   "description": "",
   "author": "Werheng <werheng.zhang@gmail.com>",
   "license": "MIT",
-  "keywords": ["unplugin"],
+  "keywords": [
+    "unplugin",
+    "vite",
+    "webpack",
+    "rollup",
+    "transform"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
@@ -78,8 +84,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/*.ts --format cjs,esm --dts --splitting --clean",
-    "dev": "tsup src/*.ts --format cjs,esm --watch src"
+    "build": "tsup",
+    "dev": "tsup --watch src",
+    "build:fix": "tsx scripts/postbuild.ts"
   },
   "dependencies": {
     "@rollup/pluginutils": "^5.1.0",
