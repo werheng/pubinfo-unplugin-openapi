@@ -11,7 +11,7 @@ export interface ResolverResult {
   from: string
 }
 
-type Arrayable<T> = T | Array<T>
+export type Arrayable<T> = T | Array<T>
 export type SideEffectsInfo = Arrayable<ResolverResult | string> | undefined
 
 export interface Options {
@@ -24,12 +24,12 @@ export interface Options {
   /**
    * Swagger2.0 / OpenAPI3.0 的地址
    */
-  input: string | string[]
+  input?: string
 
   /**
    * 文件输出目录
    */
-  output?: string | string[]
+  output?: string
 
   /**
    * 是否监听文件变化
@@ -62,4 +62,9 @@ export interface Options {
    * @default false
    */
   defaultExportByFilename?: boolean
+
+  /**
+   * 批量配置
+   */
+  batch?: Array<Pick<Options, 'imports' | 'input' | 'output'>>
 }

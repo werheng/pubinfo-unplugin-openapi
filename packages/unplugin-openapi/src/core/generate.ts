@@ -1,12 +1,9 @@
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { join } from 'node:path'
+import process from 'node:process'
 import { generateService as gen } from '@umijs/openapi'
 import type { Options } from '../types'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-export function generateOpenAPI(options: Options) {
+export function generateOpenAPI(options: Pick<Options, 'imports' | 'input' | 'output' >, root = process.cwd()) {
   const { imports, input, output } = options
 
   const outputStrs = (output as string).split('/')
@@ -15,9 +12,9 @@ export function generateOpenAPI(options: Options) {
 
   gen({
     requestLibPath: imports,
-    templatesFolder: join(__dirname, '../templates'),
+    templatesFolder: join(root, './node_modules/@pubinfo/unplugin-openapi/templates'),
     serversPath,
     projectName,
-    schemaPath: input as string,
+    schemaPath: join(root, input as string),
   })
 }

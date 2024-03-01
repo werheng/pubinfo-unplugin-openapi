@@ -4,7 +4,7 @@ import process from 'node:process'
 import { createUnimport, scanExports } from 'unimport'
 import { vueTemplateAddon } from 'unimport/addons'
 import { isPackageExists } from 'local-pkg'
-import { throttle } from 'lodash-es'
+import { pick, throttle } from 'lodash-es'
 import MagicString from 'magic-string'
 import type { Import } from 'unimport'
 import fg from 'fast-glob'
@@ -12,48 +12,23 @@ import type { ImportExtended, Options } from '../types'
 import { generateOpenAPI } from './generate'
 import { slash } from './utils'
 
-function resolveGlobsExclude(root: string, glob: string) {
-  const excludeReg = /^!/
-  return `${excludeReg.test(glob) ? '!' : ''}${resolve(root, glob.replace(excludeReg, ''))}`
-}
-
-function modifyDefaultExportsAlias(imports: ImportExtended[], options: Options): Import[] {
-  if (options.defaultExportByFilename) {
-    imports.forEach((i) => {
-      if (i.name === 'default')
-        i.as = i.from.split('/').pop()?.split('.')?.shift() ?? i.as
-    })
-  }
-
-  return imports as Import[]
-}
-
-async function scanDirExports(dirs: string[], root: string) {
-  const result = await fg(dirs, {
-    absolute: true,
-    cwd: root,
-    onlyFiles: true,
-    followSymbolicLinks: true,
-  })
-
-  const files = Array.from(new Set(result.flat())).map(slash)
-  return (await Promise.all(files.map(i => scanExports(i, false)))).flat()
-}
-
-export function createContext(options: Options, root = process.cwd()) {
+export function createContext(rawOptions: Options, root = process.cwd()) {
   root = slash(root)
 
-  options = {
+  const options = {
     imports: 'import request from \'../index\'',
     output: './src/api/service',
     watch: true,
-    ...options,
+    batch: [],
+    ...rawOptions,
   }
 
   const preferDTS = options?.dts ?? isPackageExists('typescript')
-  const outputs = Array.isArray(options.output) ? options.output : [options.output]
-  const inputs = Array.isArray(options.input) ? options.input : [options.input]
-  const dirs = outputs?.concat(outputs.map(dir => join(dir as string, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
+  const batch = options.batch.length > 0 ? options.batch : [pick(options, ['imports', 'input', 'output'])]
+  const noInput = !batch[0].input
+  const outputs = batch.map(e => e.output)
+  const dirs = outputs
+    .concat(outputs.map(dir => join(dir as string, '*.{tsx,jsx,ts,js,mjs,cjs,mts,cts}')))
     .map(dir => slash(resolveGlobsExclude(root, dir as string)))
 
   const unimport = createUnimport({
@@ -74,16 +49,15 @@ ${dts}`.trim()}\n`
     ],
   })
 
-  function generate() {
-    if (!options?.input || options.input?.length === 0)
+  function generateTS() {
+    if (noInput)
       return
 
-    inputs.forEach((input, index) => {
+    batch.forEach((opt) => {
       generateOpenAPI({
         ...options,
-        input,
-        output: outputs[index],
-      })
+        ...opt,
+      }, root)
     })
   }
 
@@ -143,13 +117,12 @@ ${dts}`.trim()}\n`
   }
 
   const writeConfigFilesThrottled = throttle(writeConfigFiles, 500, { leading: true })
-  async function writeFile(filePath: string, content = '') {
-    await fs.mkdir(dirname(filePath), { recursive: true })
-    return await fs.writeFile(filePath, content, 'utf-8')
-  }
 
   let lastDTS: string | undefined
   async function writeConfigFiles() {
+    if (noInput)
+      return
+
     const promises: any[] = []
 
     if (dts) {
@@ -167,6 +140,9 @@ ${dts}`.trim()}\n`
   }
 
   async function scanDirs() {
+    if (noInput)
+      return
+
     if (dirs?.length) {
       await unimport.modifyDynamicImports(async (imports) => {
         const exports_ = await scanDirExports(dirs, root) as ImportExtended[]
@@ -200,10 +176,43 @@ ${dts}`.trim()}\n`
   return {
     root,
     dirs,
-    generate,
+    generateTS,
     scanDirs,
     writeConfigFiles,
     writeConfigFilesThrottled,
     transform,
   }
+}
+
+function resolveGlobsExclude(root: string, glob: string) {
+  const excludeReg = /^!/
+  return `${excludeReg.test(glob) ? '!' : ''}${resolve(root, glob.replace(excludeReg, ''))}`
+}
+
+function modifyDefaultExportsAlias(imports: ImportExtended[], options: Options): Import[] {
+  if (options.defaultExportByFilename) {
+    imports.forEach((i) => {
+      if (i.name === 'default')
+        i.as = i.from.split('/').pop()?.split('.')?.shift() ?? i.as
+    })
+  }
+
+  return imports as Import[]
+}
+
+async function scanDirExports(dirs: string[], root: string) {
+  const result = await fg(dirs, {
+    absolute: true,
+    cwd: root,
+    onlyFiles: true,
+    followSymbolicLinks: true,
+  })
+
+  const files = Array.from(new Set(result.flat())).map(slash)
+  return (await Promise.all(files.map(i => scanExports(i, false)))).flat()
+}
+
+async function writeFile(filePath: string, content = '') {
+  await fs.mkdir(dirname(filePath), { recursive: true })
+  return await fs.writeFile(filePath, content, 'utf-8')
 }
