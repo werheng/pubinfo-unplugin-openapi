@@ -1,6 +1,7 @@
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 import { existsSync, promises as fs } from 'node:fs'
 import process from 'node:process'
+import { createFilter } from '@rollup/pluginutils'
 import { createUnimport, scanExports } from 'unimport'
 import { vueTemplateAddon } from 'unimport/addons'
 import { isPackageExists } from 'local-pkg'
@@ -48,6 +49,11 @@ ${dts}`.trim()}\n`
       },
     ],
   })
+
+  const filter = createFilter(
+    options.include || [/\.[jt]sx?$/, /\.vue$/, /\.vue\?vue/, /\.svelte$/],
+    options.exclude || [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/],
+  )
 
   function generateTS() {
     if (noInput)
@@ -176,6 +182,7 @@ ${dts}`.trim()}\n`
   return {
     root,
     dirs,
+    filter,
     generateTS,
     scanDirs,
     writeConfigFiles,

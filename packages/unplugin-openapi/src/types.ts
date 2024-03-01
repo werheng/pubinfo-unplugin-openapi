@@ -1,4 +1,5 @@
 import type { Import } from 'unimport'
+import type { FilterPattern } from '@rollup/pluginutils'
 
 export interface ImportExtended extends Import {
   sideEffects?: SideEffectsInfo
@@ -62,6 +63,20 @@ export interface Options {
    * @default false
    */
   defaultExportByFilename?: boolean
+
+  /**
+   * Rules to include transforming target.
+   *
+   * @default [/\.[jt]sx?$/, /\.vue\??/]
+   */
+  include?: FilterPattern
+
+  /**
+   * Rules to exclude transforming target.
+   *
+   * @default [/node_modules/, /\.git/]
+   */
+  exclude?: FilterPattern
 
   /**
    * 批量配置
