@@ -14,7 +14,7 @@ export default createUnplugin<Options>((options) => {
     // async transform(code, id) {
     //   return ctx.transform(code, id)
     // },
-    async buildStart() {
+    buildStart() {
       ctx.generateTS()
       // await ctx.scanDirs()
     },
