@@ -15,9 +15,15 @@ export interface ResolverResult {
 export type Arrayable<T> = T | Array<T>
 export type SideEffectsInfo = Arrayable<ResolverResult | string> | undefined
 
+export interface CacheOptions {
+  root?: string
+  cacheDir: string
+}
+
 export interface Options {
   /**
    * import实例的路径
+   *
    * @default import request from \'../index\'
    */
   imports?: string
@@ -38,6 +44,18 @@ export interface Options {
    * @default true
    */
   watch?: boolean
+
+  /**
+   * 忽略缓存强制生成接口文件
+   *
+   * @default false
+   */
+  force?: boolean
+
+  /**
+   * 批量配置
+   */
+  batch?: Array<Pick<Options, 'imports' | 'input' | 'output'>>
 
   /**
    * 生成的.d.ts类型文件的路径。
@@ -77,9 +95,4 @@ export interface Options {
    * @default [/node_modules/, /\.git/]
    */
   exclude?: FilterPattern
-
-  /**
-   * 批量配置
-   */
-  batch?: Array<Pick<Options, 'imports' | 'input' | 'output'>>
 }

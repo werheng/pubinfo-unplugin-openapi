@@ -1,10 +1,17 @@
-import process from 'node:process'
+import { cwd } from 'node:process'
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import http from 'node:http'
+import https from 'node:https'
+import { log } from 'node:console'
+import fetch from 'node-fetch'
 import { pick } from 'lodash-es'
 import type { Options } from '../types'
 import { generateOpenAPI } from './generate'
 import { slash } from './utils'
+import createCache from './cache'
 
-export function createContext(rawOptions: Options, root = process.cwd()) {
+export function createContext(rawOptions: Options, root = cwd()) {
   root = slash(root)
 
   const options = {
@@ -12,25 +19,63 @@ export function createContext(rawOptions: Options, root = process.cwd()) {
     output: './src/api/service',
     watch: true,
     batch: [],
+    force: false,
     ...rawOptions,
   }
 
-  const batch = options.batch.length > 0 ? options.batch : [pick(options, ['imports', 'input', 'output'])]
+  const batch = options.batch.length > 0 ? options.batch : [pick(options, ['imports', 'input', 'output', 'force'])]
+  const dirs = batch.map(opt => (opt.input || options.input || '').replace(/^\.\/|\.\.\//g, '**/'))
 
-  function generateTS() {
-    batch.forEach((opt) => {
-      if (!opt.input)
+  const { hasCache, setCache, genCacheKey } = createCache({
+    root,
+    cacheDir: join(root, 'node_modules/.pubinfo-openapi'),
+  })
+
+  async function generateTS() {
+    await Promise.all(batch.map(async (opt) => {
+      const mergeOptions = { ...options, ...opt }
+      const outputPath = join(root, mergeOptions.output)
+
+      if (!mergeOptions.input)
         return
 
-      generateOpenAPI({
-        ...options,
-        ...opt,
-      }, root)
-    })
+      const openAPI = await getSchema(mergeOptions.input)
+      if (!openAPI) {
+        log('openapi config is empty')
+        return
+      }
+
+      const cacheKey = genCacheKey(mergeOptions.input, openAPI)
+
+      if (hasCache(cacheKey) && existsSync(outputPath) && !mergeOptions.force)
+        return
+
+      generateOpenAPI(mergeOptions, root)
+      setCache(cacheKey, openAPI)
+    }))
   }
 
   return {
     root,
+    dirs,
     generateTS,
   }
+}
+
+async function getSchema(schemaPath: string) {
+  if (schemaPath.startsWith('http')) {
+    const protocol = schemaPath.startsWith('https:') ? https : http
+    try {
+      const agent = new protocol.Agent({ rejectUnauthorized: false })
+      const data = await fetch(schemaPath, { agent }).then(res => res.text())
+      return data
+    }
+    catch (error) {
+      log('fetch openapi error:', error)
+    }
+    return null
+  }
+
+  const schema = readFileSync(schemaPath, { encoding: 'utf-8' })
+  return schema
 }
