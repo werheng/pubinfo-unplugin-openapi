@@ -18,7 +18,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
     output: './src/api/service',
     watch: true,
     force: false,
-    manual: false,
+    enabled: true,
     batch: [],
     ...rawOptions,
   }
@@ -36,7 +36,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
       const mergeOptions = { ...options, ...opt }
       const outputPath = join(root, mergeOptions.output)
 
-      if (!mergeOptions.input || mergeOptions.manual)
+      if (!mergeOptions.input || !mergeOptions.enabled)
         return
 
       const openAPI = await getSchema(mergeOptions.input)

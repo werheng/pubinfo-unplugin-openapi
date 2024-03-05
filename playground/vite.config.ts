@@ -14,7 +14,6 @@ export default defineConfig({
     OpenAPI({
       imports: 'import request from \'../../index\'',
       watch: false,
-      manual: false,
       batch: [
         // {
         //   input: './scripts/openapi-example-files/swagger-simple.json',

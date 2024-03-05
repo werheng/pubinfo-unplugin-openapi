@@ -7,6 +7,13 @@ export interface CacheOptions {
 
 export interface Options {
   /**
+   * 是否启用
+   *
+   * @default true
+   */
+  enabled?: boolean
+
+  /**
    * import实例的路径
    *
    * @default import request from \'../index\'
@@ -38,14 +45,7 @@ export interface Options {
   force?: boolean
 
   /**
-   * 手动模式，需使用命令行才可生成接口文件
-   *
-   * @default false
-   */
-  manual?: boolean
-
-  /**
    * 批量配置
    */
-  batch?: Array<Pick<Options, 'imports' | 'input' | 'output' | 'force' | 'manual'>>
+  batch?: Array<Pick<Options, 'imports' | 'input' | 'output'>>
 }
