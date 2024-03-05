@@ -10,15 +10,8 @@ export default createUnplugin<Options>((options) => {
   return {
     name: 'pubinfo-unplugin-openapi',
     enforce: 'post',
-    // transformInclude(id) {
-    //   return ctx.filter(id)
-    // },
-    // async transform(code, id) {
-    //   return ctx.transform(code, id)
-    // },
     async buildStart() {
       await ctx.generateTS()
-      // await ctx.scanDirs()
     },
     vite: {
       async handleHotUpdate({ file }) {

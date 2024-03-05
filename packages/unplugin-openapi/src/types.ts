@@ -53,9 +53,16 @@ export interface Options {
   force?: boolean
 
   /**
+   * 手动模式，需使用命令行才可生成接口文件
+   *
+   * @default false
+   */
+  manual?: boolean
+
+  /**
    * 批量配置
    */
-  batch?: Array<Pick<Options, 'imports' | 'input' | 'output'>>
+  batch?: Array<Pick<Options, 'imports' | 'input' | 'output' | 'force' | 'manual'>>
 
   /**
    * 生成的.d.ts类型文件的路径。

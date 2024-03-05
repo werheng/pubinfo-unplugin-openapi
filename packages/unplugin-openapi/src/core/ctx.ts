@@ -5,7 +5,6 @@ import http from 'node:http'
 import https from 'node:https'
 import { log } from 'node:console'
 import fetch from 'node-fetch'
-import { pick } from 'lodash-es'
 import type { Options } from '../types'
 import { generateOpenAPI } from './generate'
 import { slash } from './utils'
@@ -18,12 +17,13 @@ export function createContext(rawOptions: Options, root = cwd()) {
     imports: 'import request from \'../index\'',
     output: './src/api/service',
     watch: true,
-    batch: [],
     force: false,
+    manual: false,
+    batch: [],
     ...rawOptions,
   }
 
-  const batch = options.batch.length > 0 ? options.batch : [pick(options, ['imports', 'input', 'output', 'force'])]
+  const batch = options.batch.length > 0 ? options.batch : [options]
   const dirs = batch.map(opt => (opt.input || options.input || '').replace(/^\.\/|\.\.\//g, '**/'))
 
   const { hasCache, setCache, genCacheKey } = createCache({
@@ -36,7 +36,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
       const mergeOptions = { ...options, ...opt }
       const outputPath = join(root, mergeOptions.output)
 
-      if (!mergeOptions.input)
+      if (!mergeOptions.input || mergeOptions.manual)
         return
 
       const openAPI = await getSchema(mergeOptions.input)

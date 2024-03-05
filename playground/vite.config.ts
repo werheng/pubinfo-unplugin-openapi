@@ -14,6 +14,7 @@ export default defineConfig({
     OpenAPI({
       imports: 'import request from \'../../index\'',
       watch: false,
+      manual: false,
       batch: [
         // {
         //   input: './scripts/openapi-example-files/swagger-simple.json',
@@ -27,14 +28,10 @@ export default defineConfig({
           input: './scripts/openapi-example-files/swagger-example.json',
           output: './api/modules/swagger-example',
         },
-        {
-          input: 'http://36.26.82.76:10005/v2/api-docs',
-          output: './api/modules/swagger-online',
-        },
-        {
-          input: '',
-          output: './api/modules/swagger-error',
-        },
+        // {
+        //   input: 'http://36.26.82.76:10005/v2/api-docs',
+        //   output: './api/modules/swagger-online',
+        // },
       ],
     }),
   ],

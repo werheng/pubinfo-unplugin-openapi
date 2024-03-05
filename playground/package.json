@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "openapi": "tsx scripts/openapi.ts"
+    "openapi": "pubinfo-openapi"
   },
   "dependencies": {
     "@alova/adapter-axios": "^1.2.3",
