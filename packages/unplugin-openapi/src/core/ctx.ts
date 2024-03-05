@@ -50,7 +50,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
       if (hasCache(cacheKey) && existsSync(outputPath) && !mergeOptions.force)
         return
 
-      generateOpenAPI(mergeOptions, root)
+      await generateOpenAPI(mergeOptions, root)
       setCache(cacheKey, openAPI)
     }))
   }

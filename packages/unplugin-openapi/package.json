@@ -89,7 +89,8 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch src",
-    "build:fix": "tsx scripts/postbuild.ts"
+    "build:fix": "tsx scripts/postbuild.ts",
+    "postinstall": "tsx scripts/postinstall.ts"
   },
   "dependencies": {
     "@rollup/pluginutils": "^5.1.0",

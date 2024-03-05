@@ -3,14 +3,14 @@ import { cwd } from 'node:process'
 import { generateService as gen } from '@umijs/openapi'
 import type { Options } from '../types'
 
-export function generateOpenAPI(options: Options, root = cwd()) {
+export async function generateOpenAPI(options: Options, root = cwd()) {
   const { imports, input, output } = options
 
   const outputStrs = (output as string).split('/')
   const projectName = outputStrs.pop()
   const serversPath = outputStrs.length > 0 ? outputStrs.join('/') : ''
 
-  gen({
+  await gen({
     requestLibPath: imports,
     templatesFolder: join(root, 'node_modules/@pubinfo/unplugin-openapi/templates'),
     serversPath,
