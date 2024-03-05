@@ -99,6 +99,7 @@
     "consola": "^3.2.3",
     "fast-glob": "^3.3.2",
     "minimatch": "^9.0.3",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "unplugin": "^1.8.0"
   }
 }
