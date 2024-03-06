@@ -31,13 +31,6 @@ export interface Options {
   output?: string
 
   /**
-   * 是否监听文件变化
-   *
-   * @default true
-   */
-  watch?: boolean
-
-  /**
    * 忽略缓存强制生成接口文件
    *
    * @default false

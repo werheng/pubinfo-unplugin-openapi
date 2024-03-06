@@ -20,7 +20,7 @@
           "标准地址模块"
         ],
         "summary": "分类详情查询",
-        "operationId": "save",
+        "operationId": "save123",
         "parameters": [
           {
             "name": "id",

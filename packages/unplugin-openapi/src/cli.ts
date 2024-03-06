@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { loadConfig } from 'c12'
-import { consola } from 'consola'
+import consola from 'consola'
 import { Command } from 'commander'
 import pkg from '../package.json'
 import type { Options } from './types'

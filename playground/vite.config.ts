@@ -9,28 +9,15 @@ export default defineConfig({
     Vue(),
     Inspect(),
     AutoImport({
-      dirs: ['./api/modules/**/*.ts'],
+      dirs: ['./src/api/modules/**/*.ts'],
     }),
     OpenAPI({
       imports: 'import request from \'../../index\'',
-      watch: false,
       batch: [
-        // {
-        //   input: './scripts/openapi-example-files/swagger-simple.json',
-        //   output: './api/modules/swagger-simple',
-        // },
-        // {
-        //   input: './scripts/openapi-example-files/swagger-get-method-params-convert-obj.json',
-        //   output: './api/modules/swagger-get-method-params-convert-obj',
-        // },
         {
-          input: './scripts/openapi-example-files/swagger-example.json',
-          output: './api/modules/swagger-example',
+          input: './src/openapi-json/swagger-example.json',
+          output: './src/api/modules/swagger-example',
         },
-        // {
-        //   input: 'http://36.26.82.76:10005/v2/api-docs',
-        //   output: './api/modules/swagger-online',
-        // },
       ],
     }),
   ],

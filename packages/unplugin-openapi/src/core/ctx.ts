@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import http from 'node:http'
 import https from 'node:https'
-import { log } from 'node:console'
+import consola from 'consola'
 import fetch from 'node-fetch'
 import type { Options } from '../types'
 import { generateOpenAPI } from './generate'
@@ -41,7 +41,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
 
       const openAPI = await getSchema(mergeOptions.input)
       if (!openAPI) {
-        log('openapi config is empty')
+        consola.warn('openapi config is empty')
         return
       }
 
@@ -50,7 +50,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
       if (hasCache(cacheKey) && existsSync(outputPath) && !mergeOptions.force)
         return
 
-      await generateOpenAPI(mergeOptions, root)
+      await generateOpenAPI(mergeOptions as Required<Options>, root)
       setCache(cacheKey, openAPI)
     }))
   }
@@ -71,7 +71,7 @@ async function getSchema(schemaPath: string) {
       return data
     }
     catch (error) {
-      log('fetch openapi error:', error)
+      consola.error('fetch openapi error:', error)
     }
     return null
   }
