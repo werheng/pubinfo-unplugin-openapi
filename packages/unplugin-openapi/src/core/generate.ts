@@ -1,9 +1,8 @@
 import { join } from 'node:path'
-import { cwd } from 'node:process'
 import { generateService as gen } from '@umijs/openapi'
 import type { Options } from '../types'
 
-export async function generateOpenAPI(options: Required<Options>, root = cwd()) {
+export async function generateOpenAPI(options: Required<Options>, root: string) {
   const { imports, input, output } = options
 
   const outputStrs = output.split('/')
@@ -12,8 +11,8 @@ export async function generateOpenAPI(options: Required<Options>, root = cwd()) 
 
   await gen({
     requestLibPath: imports,
-    templatesFolder: join(root, 'node_modules/@pubinfo/unplugin-openapi/templates'),
-    serversPath,
+    templatesFolder: join(root, options.templates),
+    serversPath: join(root, serversPath),
     projectName,
     schemaPath: input?.startsWith('http') ? input : join(root, input),
   })

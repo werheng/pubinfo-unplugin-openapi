@@ -16,9 +16,9 @@ export function createContext(rawOptions: Options, root = cwd()) {
   const options = {
     imports: 'import request from \'../index\'',
     output: './src/api/service',
-    watch: true,
     force: false,
     enabled: true,
+    templates: 'node_modules/@pubinfo/unplugin-openapi/templates',
     batch: [],
     ...rawOptions,
   }
@@ -27,9 +27,8 @@ export function createContext(rawOptions: Options, root = cwd()) {
   const dirs = batch.map(opt => (opt.input || options.input || '').replace(/^\.\/|\.\.\//g, '**/'))
 
   const { hasCache, setCache, genCacheKey } = createCache({
-    root,
     cacheDir: join(root, 'node_modules/.pubinfo-openapi'),
-  })
+  }, root)
 
   async function generateTS() {
     await Promise.all(batch.map(async (opt) => {
@@ -39,7 +38,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
       if (!mergeOptions.input || !mergeOptions.enabled)
         return
 
-      const openAPI = await getSchema(mergeOptions.input)
+      const openAPI = await getSchema(mergeOptions.input, root)
       if (!openAPI) {
         consola.warn('openapi config is empty')
         return
@@ -62,7 +61,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
   }
 }
 
-async function getSchema(schemaPath: string) {
+async function getSchema(schemaPath: string, root: string) {
   if (schemaPath.startsWith('http')) {
     const protocol = schemaPath.startsWith('https:') ? https : http
     try {
@@ -76,6 +75,6 @@ async function getSchema(schemaPath: string) {
     return null
   }
 
-  const schema = readFileSync(schemaPath, { encoding: 'utf-8' })
+  const schema = readFileSync(join(root, schemaPath), { encoding: 'utf-8' })
   return schema
 }

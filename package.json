@@ -9,6 +9,8 @@
     "build": "pnpm -F @pubinfo/unplugin-openapi build",
     "dev": "pnpm -F @pubinfo/unplugin-openapi dev",
     "play": "npm -C playground run dev",
+    "test": "vitest",
+    "test:run": "vitest run",
     "commit": "git-cz",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -26,7 +28,8 @@
     "simple-git-hooks": "^2.9.0",
     "tsup": "^8.0.2",
     "tsx": "^4.7.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^1.3.1"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",

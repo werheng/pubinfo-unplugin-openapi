@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generate > generate swagger-example 1`] = `
+"import request from '../index';
+
+/** 分类详情查询 GET /address/category/\${param0} */
+export function save(params: API.saveParams, options?: { [key: string]: any }) {
+  const { id: param0, ...queryParams } = params;
+  return request.Get<API.ResponseData>(\`/address/category/\${param0}\`, {
+    params: { ...queryParams },
+    ...(options || {}),
+  });
+}
+"
+`;
+
+exports[`generate > generate swagger-example 2`] = `
+"// API 更新时间：
+// API 唯一标识：
+export * from './biaozhundezhimokuai';
+"
+`;
+
+exports[`generate > generate swagger-example 3`] = `
+"declare namespace API {
+  interface ResponseData {
+    code?: number;
+    msg?: string;
+    hint?: string;
+    data?: Record<string, any>;
+    success?: boolean;
+  }
+
+  interface saveParams {
+    id: number;
+  }
+}
+"
+`;

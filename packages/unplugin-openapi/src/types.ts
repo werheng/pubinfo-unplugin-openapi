@@ -1,7 +1,6 @@
 export type Arrayable<T> = T | Array<T>
 
 export interface CacheOptions {
-  root?: string
   cacheDir: string
 }
 
@@ -36,6 +35,11 @@ export interface Options {
    * @default false
    */
   force?: boolean
+
+  /**
+   * 模板文件类型或路径
+   */
+  templates?: string
 
   /**
    * 批量配置

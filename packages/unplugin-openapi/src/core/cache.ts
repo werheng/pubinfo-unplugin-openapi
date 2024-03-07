@@ -1,12 +1,11 @@
-import { cwd } from 'node:process'
 import { existsSync, unlinkSync } from 'node:fs'
 import { join } from 'node:path'
 import fg from 'fast-glob'
 import type { CacheOptions } from '../types'
 import { getHash, writeFile } from './utils'
 
-export default function createCache(options: CacheOptions) {
-  const { root = cwd(), cacheDir } = options
+export default function createCache(options: CacheOptions, root: string) {
+  const { cacheDir } = options
 
   function genCacheKey(id: string, content: string) {
     return `${getHash(id)}_${getHash(content)}`
