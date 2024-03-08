@@ -90,7 +90,7 @@
     "build": "tsup",
     "dev": "tsup --watch src",
     "build:fix": "tsx scripts/postbuild.ts",
-    "postinstall": "tsx scripts/postinstall.ts"
+    "postinstall": "npx tsx scripts/postinstall.ts"
   },
   "dependencies": {
     "@umijs/openapi": "1.10.1",

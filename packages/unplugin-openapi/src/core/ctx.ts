@@ -50,7 +50,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
         return
 
       await generateOpenAPI(mergeOptions as Required<Options>, root)
-      setCache(cacheKey, openAPI)
+      await setCache(cacheKey, openAPI)
     }))
   }
 
@@ -61,7 +61,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
   }
 }
 
-async function getSchema(schemaPath: string, root: string) {
+export async function getSchema(schemaPath: string, root: string) {
   if (schemaPath.startsWith('http')) {
     const protocol = schemaPath.startsWith('https:') ? https : http
     try {

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`generate > generate swagger-example 1`] = `
+exports[`generate > should generate by openapi.json 1`] = `
 "import request from '../index';
 
 /** 分类详情查询 GET /address/category/\${param0} */
@@ -14,14 +14,14 @@ export function save(params: API.saveParams, options?: { [key: string]: any }) {
 "
 `;
 
-exports[`generate > generate swagger-example 2`] = `
+exports[`generate > should generate by openapi.json 2`] = `
 "// API 更新时间：
 // API 唯一标识：
 export * from './biaozhundezhimokuai';
 "
 `;
 
-exports[`generate > generate swagger-example 3`] = `
+exports[`generate > should generate by openapi.json 3`] = `
 "declare namespace API {
   interface ResponseData {
     code?: number;
@@ -33,6 +33,81 @@ exports[`generate > generate swagger-example 3`] = `
 
   interface saveParams {
     id: number;
+  }
+}
+"
+`;
+
+exports[`generate > should generate by swagger.json 1`] = `
+"import request from '../index';
+
+/** 登录 POST /login */
+export function loginUsingPost(body: API.LoginBody, options?: { [key: string]: any }) {
+  return request.Post<API.RObject_>('/login', body, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    ...(options || {}),
+  });
+}
+
+/** 登出 DELETE /logout */
+export function logoutUsingDelete(options?: { [key: string]: any }) {
+  return request.Delete<API.RObject_>(
+    '/logout',
+    {},
+    {
+      ...(options || {}),
+    },
+  );
+}
+
+/** 刷新 POST /refresh */
+export function refreshUsingPost(options?: { [key: string]: any }) {
+  return request.Post<API.RObject_>(
+    '/refresh',
+    {},
+    {
+      ...(options || {}),
+    },
+  );
+}
+
+/** 注册 POST /register */
+export function registerUsingPost(body: API.RegisterBody, options?: { [key: string]: any }) {
+  return request.Post<API.RObject_>('/register', body, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    ...(options || {}),
+  });
+}
+"
+`;
+
+exports[`generate > should generate by swagger.json 2`] = `
+"// API 更新时间：
+// API 唯一标识：
+export * from './denglujiekou';
+"
+`;
+
+exports[`generate > should generate by swagger.json 3`] = `
+"declare namespace API {
+  interface LoginBody {
+    password?: string;
+    username?: string;
+  }
+
+  interface RegisterBody {
+    password?: string;
+    username?: string;
+  }
+
+  interface RObject_ {
+    code?: number;
+    data?: Record<string, any>;
+    msg?: string;
   }
 }
 "

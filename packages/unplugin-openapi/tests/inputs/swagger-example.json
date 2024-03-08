@@ -1,106 +1,214 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
-    "title": "标准地址库接口",
-    "description": "接口文档描述",
+    "version": "2.0.0",
+    "title": "系统权限接口文档",
     "contact": {},
-    "license": {},
-    "version": "v1.0"
+    "license": {}
   },
-  "servers": [
-    {
-      "url": "http://127.0.0.1:8080/pubinfo-address-repo",
-      "description": "Generated server url"
-    }
-  ],
+  "host": "39.98.37.226:9300",
+  "basePath": "/",
+  "tags": [{
+    "name": "登录接口",
+    "description": "Token Controller"
+  }],
   "paths": {
-    "/address/category/{id}": {
-      "get": {
-        "tags": [
-          "标准地址模块"
-        ],
-        "summary": "分类详情查询",
-        "operationId": "save",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header"
+    "/login": {
+      "post": {
+        "tags": ["登录接口"],
+        "summary": "登录",
+        "operationId": "loginUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "loginBody",
+          "description": "loginBody",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/LoginBody",
+            "originalRef": "LoginBody"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseData"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/R«object»",
+              "originalRef": "R«object»"
             }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
-        }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }]
       }
-    }
-  },
-  "components": {
-    "schemas": {
-      "ResponseData": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "msg": {
-            "type": "string"
-          },
-          "hint": {
-            "type": "string"
-          },
-          "data": {
-            "type": "object"
-          },
-          "success": {
-            "type": "boolean"
-          }
-        }
-      }
-    }
-  },
-  "x-openapi": {
-    "x-setting": {
-      "customCode": 200,
-      "language": "zh-CN",
-      "enableSwaggerModels": true,
-      "swaggerModelName": "实体类列表",
-      "enableReloadCacheParameter": false,
-      "enableAfterScript": true,
-      "enableDocumentManage": true,
-      "enableVersion": false,
-      "enableRequestCache": true,
-      "enableFilterMultipartApis": false,
-      "enableFilterMultipartApiMethodType": "POST",
-      "enableHost": false,
-      "enableHostText": "",
-      "enableDynamicParameter": true,
-      "enableDebug": true,
-      "enableFooter": true,
-      "enableFooterCustom": false,
-      "enableSearch": true,
-      "enableOpenApi": true,
-      "enableHomeCustom": false,
-      "enableGroup": true,
-      "enableResponseCode": true
     },
-    "x-markdownFiles": []
+    "/logout": {
+      "delete": {
+        "tags": ["登录接口"],
+        "summary": "登出",
+        "operationId": "logoutUsingDELETE",
+        "produces": ["*/*"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/R«object»",
+              "originalRef": "R«object»"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }]
+      }
+    },
+    "/refresh": {
+      "post": {
+        "tags": ["登录接口"],
+        "summary": "刷新",
+        "operationId": "refreshUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/R«object»",
+              "originalRef": "R«object»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }]
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": ["登录接口"],
+        "summary": "注册",
+        "operationId": "registerUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "registerBody",
+          "description": "registerBody",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/RegisterBody",
+            "originalRef": "RegisterBody"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/R«object»",
+              "originalRef": "R«object»"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [{
+          "Authorization": ["global"]
+        }]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "LoginBody": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "LoginBody"
+    },
+    "RegisterBody": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "RegisterBody"
+    },
+    "R«object»": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data": {
+          "type": "object"
+        },
+        "msg": {
+          "type": "string"
+        }
+      },
+      "title": "R«object»"
+    }
   }
 }

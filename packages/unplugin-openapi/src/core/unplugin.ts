@@ -5,18 +5,18 @@ import { createContext } from './ctx'
 import { slash } from './utils'
 
 export default createUnplugin<Options>((options) => {
-  const ctx = createContext(options)
+  const { dirs, generateTS } = createContext(options)
 
   return {
-    name: 'pubinfo-unplugin-openapi',
+    name: 'unplugin-openapi',
     enforce: 'post',
     async buildStart() {
-      await ctx.generateTS()
+      await generateTS()
     },
     vite: {
       async handleHotUpdate({ file }) {
-        if (ctx.dirs?.some(glob => minimatch(slash(file), slash(glob))))
-          await ctx.generateTS()
+        if (dirs?.some(glob => minimatch(slash(file), slash(glob))))
+          await generateTS()
       },
     },
   }

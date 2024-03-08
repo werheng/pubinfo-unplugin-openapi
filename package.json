@@ -11,13 +11,14 @@
     "play": "npm -C playground run dev",
     "test": "vitest",
     "test:run": "vitest run",
-    "publish-packages": "pnpm run build && pnpm run test && changeset version && changeset publish",
+    "change": "changeset",
+    "publish-packages": "pnpm run build && pnpm run test:run && changeset version && changeset publish",
     "commit": "git-cz",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.6.4",
+    "@antfu/eslint-config": "^2.8.0",
     "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^18.6.1",
     "@commitlint/config-conventional": "^18.6.2",

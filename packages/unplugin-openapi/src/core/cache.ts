@@ -19,9 +19,9 @@ export default function createCache(options: CacheOptions, root: string) {
     return existsSync(join(cacheDir, `${key}.json`))
   }
 
-  function setCache(key: string, content: string) {
+  async function setCache(key: string, content: string) {
     removeCache(key)
-    writeFile(join(cacheDir, `${key}.json`), content)
+    await writeFile(join(cacheDir, `${key}.json`), content)
   }
 
   async function removeCache(key: string) {
