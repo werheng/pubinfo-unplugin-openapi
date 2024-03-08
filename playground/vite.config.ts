@@ -12,6 +12,7 @@ export default defineConfig({
       dirs: ['./src/api/modules/**/*.ts'],
     }),
     OpenAPI({
+      enabled: false,
       imports: 'import request from \'../../index\'',
       batch: [
         {

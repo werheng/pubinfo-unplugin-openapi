@@ -6,6 +6,7 @@ export const alovaInstance = createAlova({
   statesHook: VueHook,
   requestAdapter: axiosRequestAdapter(),
 
+  baseURL: 'https://lssyjxfyy.yjj.lishui.gov.cn:50001',
   timeout: 60 * 1000,
 
   // 响应缓存
