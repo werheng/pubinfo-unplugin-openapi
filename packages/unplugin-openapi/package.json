@@ -84,7 +84,8 @@
   },
   "files": [
     "*.d.ts",
-    "dist"
+    "dist",
+    "templates"
   ],
   "scripts": {
     "build": "tsup",
