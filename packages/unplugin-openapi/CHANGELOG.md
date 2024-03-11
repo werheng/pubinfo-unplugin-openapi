@@ -1,5 +1,11 @@
 # @pubinfo/unplugin-openapi
 
+## 0.0.5
+
+### Patch Changes
+
+- b585ab8: 解决引用模板路径错误的问题
+
 ## 0.0.4
 
 ### Patch Changes
