@@ -2,7 +2,7 @@
   "name": "@pubinfo/unplugin-openapi",
   "type": "module",
   "version": "0.0.4",
-  "description": "",
+  "description": "根据openapi协议生成请求文件的插件",
   "author": "Werheng <werheng.zhang@gmail.com>",
   "license": "MIT",
   "keywords": [

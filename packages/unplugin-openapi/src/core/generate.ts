@@ -15,7 +15,7 @@ export async function generateOpenAPI(options: Required<Options>, root: string) 
 
   await gen({
     requestLibPath: Object.keys(imports).map(key => genImport(key, imports[key])).join('\n'),
-    templatesFolder: join(__dirname, '../../templates'),
+    templatesFolder: join(__dirname, '../templates'),
     serversPath: join(root, serversPath),
     projectName,
     schemaPath: input?.startsWith('http') ? input : join(root, input),
