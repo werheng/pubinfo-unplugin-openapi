@@ -12,7 +12,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "change": "changeset",
-    "publish-packages": "pnpm run build && pnpm run test:run && changeset version && changeset publish",
+    "publish-packages": "pnpm run build && pnpm run test:run && changeset version && changeset publish --registry=https://registry.npmjs.org/",
     "commit": "git-cz",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
