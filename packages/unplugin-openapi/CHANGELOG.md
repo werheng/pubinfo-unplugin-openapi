@@ -1,5 +1,11 @@
 # @pubinfo/unplugin-openapi
 
+## 0.0.6
+
+### Patch Changes
+
+- ef85f99: 修改 bin 中的指令命名
+
 ## 0.0.5
 
 ### Patch Changes
