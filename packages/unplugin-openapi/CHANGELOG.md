@@ -1,5 +1,11 @@
 # @pubinfo/unplugin-openapi
 
+## 0.0.4
+
+### Patch Changes
+
+- 762882b: 移除对 cjs 的兼容并删除 templates 字段的配置
+
 ## 0.0.3
 
 ### Patch Changes
