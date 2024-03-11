@@ -1,5 +1,11 @@
 # @pubinfo/unplugin-openapi
 
+## 0.0.3
+
+### Patch Changes
+
+- 1caae9a: 解决打包后未将 templates 加入 files 字段的问题
+
 ## 0.0.2
 
 ### Patch Changes

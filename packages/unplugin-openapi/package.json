@@ -1,7 +1,7 @@
 {
   "name": "@pubinfo/unplugin-openapi",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "author": "Werheng <werheng.zhang@gmail.com>",
   "license": "MIT",
