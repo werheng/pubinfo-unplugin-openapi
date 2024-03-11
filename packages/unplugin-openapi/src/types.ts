@@ -44,7 +44,7 @@ export interface Options {
   /**
    * 模板文件类型或路径
    */
-  templates?: string
+  // templates?: string
 
   /**
    * 批量配置

@@ -18,7 +18,6 @@ export function createContext(rawOptions: Options, root = cwd()) {
     output: './src/api/service',
     force: false,
     enabled: true,
-    templates: 'node_modules/@pubinfo/unplugin-openapi/templates',
     batch: [],
     ...rawOptions,
   }

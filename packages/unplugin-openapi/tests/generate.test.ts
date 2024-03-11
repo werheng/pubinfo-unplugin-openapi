@@ -18,7 +18,6 @@ async function generateFile(options: Options) {
 describe('generate', async () => {
   it('should generate by openapi.json', async () => {
     const results = await generateFile({
-      templates: './templates',
       input: './tests/inputs/openapi-example.json',
       output: './tests/outputs/openapi-example',
       force: true,
@@ -31,7 +30,6 @@ describe('generate', async () => {
 
   it('should generate by swagger.json', async () => {
     const results = await generateFile({
-      templates: './templates',
       input: './tests/inputs/swagger-example.json',
       output: './tests/outputs/swagger-example',
       force: true,
