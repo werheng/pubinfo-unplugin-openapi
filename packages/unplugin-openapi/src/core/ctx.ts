@@ -14,7 +14,7 @@ export function createContext(rawOptions: Options, root = cwd()) {
   root = slash(root)
 
   const options = {
-    imports: 'import request from \'../index\'',
+    imports: { '../index': 'request' },
     output: './src/api/service',
     force: false,
     enabled: true,

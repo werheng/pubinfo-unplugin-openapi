@@ -4,6 +4,8 @@ export interface CacheOptions {
   cacheDir: string
 }
 
+type ESMImport = string | string[] | Array<{ name: string, as?: string }>
+
 export interface Options {
   /**
    * 是否启用
@@ -13,11 +15,14 @@ export interface Options {
   enabled?: boolean
 
   /**
-   * import实例的路径
+   * 文件 import 内容
    *
-   * @default import request from \'../index\'
+   * @default { '../index': 'request' } // import request from '../index'
+   *
+   * @example { 'request': ['foo', 'bar'] } // import { foo , bar } from 'request'
+   * @example { 'request': [{ name: 'foo', as: 'bar' }] } // import { foo as bar } from 'request'
    */
-  imports?: string
+  imports?: Record<string, ESMImport>
 
   /**
    * Swagger2.0 / OpenAPI3.0 的地址
