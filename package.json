@@ -13,7 +13,7 @@
     "test:run": "vitest run",
     "change": "changeset",
     "version": "changeset version",
-    "release": "pnpm run build && pnpm run test:run && changeset publish",
+    "release": "pnpm run build && pnpm run test:run && changeset publish && git push --follow-tags",
     "commit": "git-cz",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
