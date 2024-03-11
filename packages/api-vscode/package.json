@@ -2,6 +2,7 @@
   "name": "@pubinfo/api-vscode",
   "type": "module",
   "version": "0.0.0",
+  "private": true,
   "description": "",
   "author": "Werheng <werheng.zhang@gmail.com>",
   "license": "MIT",
