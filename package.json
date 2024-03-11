@@ -12,7 +12,8 @@
     "test": "vitest",
     "test:run": "vitest run",
     "change": "changeset",
-    "publish-packages": "pnpm run build && pnpm run test:run && changeset version && changeset publish",
+    "version": "changeset version",
+    "release": "pnpm run build && pnpm run test:run && changeset publish",
     "commit": "git-cz",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
