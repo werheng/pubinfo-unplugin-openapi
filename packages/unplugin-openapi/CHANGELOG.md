@@ -1,5 +1,12 @@
 # @pubinfo/unplugin-openapi
 
+## 0.0.7
+
+### Patch Changes
+
+- 9b03e95: 优先读取根目录配置文件
+- a2334f0: 模板增加 eslint-disabled 等
+
 ## 0.0.6
 
 ### Patch Changes
