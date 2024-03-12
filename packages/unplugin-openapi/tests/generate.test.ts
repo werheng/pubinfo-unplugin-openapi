@@ -6,7 +6,7 @@ import type { Options } from '../src/types'
 
 const root = resolve(__dirname, '../')
 async function generateFile(options: Options) {
-  const ctx = createContext(options, root)
+  const ctx = await createContext(options, root)
   await ctx.generateTS()
 
   const dirs = await readdir(join(root, options.output!))

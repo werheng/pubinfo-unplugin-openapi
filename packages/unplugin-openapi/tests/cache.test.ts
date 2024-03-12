@@ -14,7 +14,7 @@ describe('cache', async () => {
     input: './tests/inputs/cache.json',
     output: './tests/outputs/cache',
   }
-  const { generateTS } = createContext(options, root)
+  const { generateTS } = await createContext(options, root)
   const { hasCache, genCacheKey, removeCache } = createCache({ cacheDir }, root)
   const openAPI = await getSchema(options.input, root)
   const cacheKey = genCacheKey(options.input, openAPI!)
