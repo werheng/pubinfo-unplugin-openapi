@@ -15,6 +15,7 @@ async function fixCjs() {
     consola.info(`Fix ${basename(file)}`)
     let code = await fs.readFile(file, 'utf8')
     code = code.replace('exports.default =', 'module.exports =')
+    code = code.replace('var __dirname = (0, import_node_path.dirname)((0, import_node_url.fileURLToPath)(import_meta.url));', '')
     code += 'exports.default = module.exports;'
     await fs.writeFile(file, code)
   }

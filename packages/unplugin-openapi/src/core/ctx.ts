@@ -5,21 +5,24 @@ import http from 'node:http'
 import https from 'node:https'
 import consola from 'consola'
 import fetch from 'node-fetch'
+import { loadConfig } from 'c12'
 import type { Options } from '../types'
 import { generateOpenAPI } from './generate'
 import { slash } from './utils'
 import createCache from './cache'
 
-export function createContext(rawOptions: Options, root = cwd()) {
+export async function createContext(rawOptions: Options, root = cwd()) {
   root = slash(root)
 
+  const { config } = await loadConfig<Options>({ name: 'openapi' })
+
   const options = {
-    imports: { '../index': 'request' },
+    imports: { '@/api': 'request' },
     output: './src/api/service',
     force: false,
     enabled: true,
     batch: [],
-    ...rawOptions,
+    ...((config && Object.keys(config).length > 0) ? config : rawOptions),
   }
 
   const batch = options.batch.length > 0 ? options.batch : [options]

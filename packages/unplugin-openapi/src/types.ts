@@ -17,7 +17,7 @@ export interface Options {
   /**
    * 文件 import 内容
    *
-   * @default { '../index': 'request' } // import request from '../index'
+   * @default { '@/api': 'request' } // import request from '@/api'
    *
    * @example { 'request': ['foo', 'bar'] } // import { foo , bar } from 'request'
    * @example { 'request': [{ name: 'foo', as: 'bar' }] } // import { foo as bar } from 'request'

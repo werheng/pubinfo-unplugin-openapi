@@ -18,7 +18,7 @@ async function main() {
 
   program.parse()
 
-  const ctx = createContext({
+  const ctx = await createContext({
     ...config,
     force: true,
     enabled: true,

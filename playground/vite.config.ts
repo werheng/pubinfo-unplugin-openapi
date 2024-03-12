@@ -12,8 +12,8 @@ export default defineConfig({
       dirs: ['./src/api/modules/**/*.ts'],
     }),
     OpenAPI({
-      enabled: false,
-      imports: 'import request from \'../../index\'',
+      enabled: true,
+      imports: { '@/api': 'request' },
       batch: [
         {
           input: './src/openapi-json/swagger-example.json',
