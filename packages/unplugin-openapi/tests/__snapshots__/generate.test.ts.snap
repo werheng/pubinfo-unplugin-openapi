@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`generate > should generate by openapi.json 1`] = `
-"import request from '../index';
+"import request from '@/api';
 
 /** 分类详情查询 GET /address/category/\${param0} */
 export function save(params: API.saveParams, options?: { [key: string]: any }) {
@@ -22,24 +22,33 @@ export * from './biaozhundezhimokuai';
 `;
 
 exports[`generate > should generate by openapi.json 3`] = `
-"declare namespace API {
-  interface ResponseData {
-    code?: number;
-    msg?: string;
-    hint?: string;
-    data?: Record<string, any>;
-    success?: boolean;
-  }
-
-  interface saveParams {
-    id: number;
-  }
+"/* eslint-disable */
+/* prettier-ignore */
+// @ts-nocheck
+declare namespace API {
+  
+        interface ResponseData
+          {
+                'code'?: number;
+                'msg'?: string;
+                'hint'?: string;
+                'data'?: Record<string, any>;
+                'success'?: boolean;
+          }
+        
+  
+        interface saveParams
+          {
+                'id': number;
+          }
+        
+  
 }
 "
 `;
 
 exports[`generate > should generate by swagger.json 1`] = `
-"import request from '../index';
+"import request from '@/api';
 
 /** 登录 POST /login */
 export function loginUsingPost(body: API.LoginBody, options?: { [key: string]: any }) {
@@ -93,22 +102,33 @@ export * from './denglujiekou';
 `;
 
 exports[`generate > should generate by swagger.json 3`] = `
-"declare namespace API {
-  interface LoginBody {
-    password?: string;
-    username?: string;
-  }
-
-  interface RegisterBody {
-    password?: string;
-    username?: string;
-  }
-
-  interface RObject_ {
-    code?: number;
-    data?: Record<string, any>;
-    msg?: string;
-  }
+"/* eslint-disable */
+/* prettier-ignore */
+// @ts-nocheck
+declare namespace API {
+  
+        interface LoginBody
+          {
+                'password'?: string;
+                'username'?: string;
+          }
+        
+  
+        interface RegisterBody
+          {
+                'password'?: string;
+                'username'?: string;
+          }
+        
+  
+        interface RObject_
+          {
+                'code'?: number;
+                'data'?: Record<string, any>;
+                'msg'?: string;
+          }
+        
+  
 }
 "
 `;
