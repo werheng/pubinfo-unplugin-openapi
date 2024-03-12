@@ -23,26 +23,19 @@ export * from './biaozhundezhimokuai';
 
 exports[`generate > should generate by openapi.json 3`] = `
 "/* eslint-disable */
-/* prettier-ignore */
 // @ts-nocheck
 declare namespace API {
-  
-        interface ResponseData
-          {
-                'code'?: number;
-                'msg'?: string;
-                'hint'?: string;
-                'data'?: Record<string, any>;
-                'success'?: boolean;
-          }
-        
-  
-        interface saveParams
-          {
-                'id': number;
-          }
-        
-  
+  interface ResponseData {
+    code?: number;
+    msg?: string;
+    hint?: string;
+    data?: Record<string, any>;
+    success?: boolean;
+  }
+
+  interface saveParams {
+    id: number;
+  }
 }
 "
 `;
@@ -103,32 +96,23 @@ export * from './denglujiekou';
 
 exports[`generate > should generate by swagger.json 3`] = `
 "/* eslint-disable */
-/* prettier-ignore */
 // @ts-nocheck
 declare namespace API {
-  
-        interface LoginBody
-          {
-                'password'?: string;
-                'username'?: string;
-          }
-        
-  
-        interface RegisterBody
-          {
-                'password'?: string;
-                'username'?: string;
-          }
-        
-  
-        interface RObject_
-          {
-                'code'?: number;
-                'data'?: Record<string, any>;
-                'msg'?: string;
-          }
-        
-  
+  interface LoginBody {
+    password?: string;
+    username?: string;
+  }
+
+  interface RegisterBody {
+    password?: string;
+    username?: string;
+  }
+
+  interface RObject_ {
+    code?: number;
+    data?: Record<string, any>;
+    msg?: string;
+  }
 }
 "
 `;
