@@ -1,5 +1,11 @@
 # @pubinfo/unplugin-openapi
 
+## 0.0.8
+
+### Patch Changes
+
+- f384525: 修改模板文件
+
 ## 0.0.7
 
 ### Patch Changes
