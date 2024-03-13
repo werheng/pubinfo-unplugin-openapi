@@ -1,5 +1,11 @@
 # @pubinfo/unplugin-openapi
 
+## 0.0.9
+
+### Patch Changes
+
+- d31c6d5: 修改模板内容, 优化 TS 类型展示
+
 ## 0.0.8
 
 ### Patch Changes
