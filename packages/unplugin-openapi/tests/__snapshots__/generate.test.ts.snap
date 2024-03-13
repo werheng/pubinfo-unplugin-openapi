@@ -3,10 +3,15 @@
 exports[`generate > should generate by openapi.json 1`] = `
 "import request from '@/api';
 
-/** 分类详情查询 GET /address/category/\${param0} */
-export function save(params: API.saveParams, options?: { [key: string]: any }) {
+/**
+ * @description 分类详情查询
+ * @url /address/category/\${param0}
+ * @method GET
+ * @author unplugin-openapi
+ */
+export function save(params: ExpandRecursively<API.saveParams>, options?: { [key: string]: any }) {
   const { id: param0, ...queryParams } = params;
-  return request.Get<API.ResponseData>(\`/address/category/\${param0}\`, {
+  return request.Get<ExpandRecursively<API.ResponseData>>(\`/address/category/\${param0}\`, {
     params: { ...queryParams },
     ...(options || {}),
   });
@@ -37,15 +42,30 @@ declare namespace API {
     id: number;
   }
 }
+
+type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
+type ExpandRecursively<T> = T extends object
+  ? T extends infer O
+    ? { [K in keyof O]: ExpandRecursively<O[K]> }
+    : never
+  : T;
 "
 `;
 
 exports[`generate > should generate by swagger.json 1`] = `
 "import request from '@/api';
 
-/** 登录 POST /login */
-export function loginUsingPost(body: API.LoginBody, options?: { [key: string]: any }) {
-  return request.Post<API.RObject_>('/login', body, {
+/**
+ * @description 登录
+ * @url /login
+ * @method POST
+ * @author unplugin-openapi
+ */
+export function loginUsingPost(
+  body: ExpandRecursively<API.LoginBody>,
+  options?: { [key: string]: any },
+) {
+  return request.Post<ExpandRecursively<API.RObject_>>('/login', body, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -53,9 +73,14 @@ export function loginUsingPost(body: API.LoginBody, options?: { [key: string]: a
   });
 }
 
-/** 登出 DELETE /logout */
+/**
+ * @description 登出
+ * @url /logout
+ * @method DELETE
+ * @author unplugin-openapi
+ */
 export function logoutUsingDelete(options?: { [key: string]: any }) {
-  return request.Delete<API.RObject_>(
+  return request.Delete<ExpandRecursively<API.RObject_>>(
     '/logout',
     {},
     {
@@ -64,9 +89,14 @@ export function logoutUsingDelete(options?: { [key: string]: any }) {
   );
 }
 
-/** 刷新 POST /refresh */
+/**
+ * @description 刷新
+ * @url /refresh
+ * @method POST
+ * @author unplugin-openapi
+ */
 export function refreshUsingPost(options?: { [key: string]: any }) {
-  return request.Post<API.RObject_>(
+  return request.Post<ExpandRecursively<API.RObject_>>(
     '/refresh',
     {},
     {
@@ -75,9 +105,17 @@ export function refreshUsingPost(options?: { [key: string]: any }) {
   );
 }
 
-/** 注册 POST /register */
-export function registerUsingPost(body: API.RegisterBody, options?: { [key: string]: any }) {
-  return request.Post<API.RObject_>('/register', body, {
+/**
+ * @description 注册
+ * @url /register
+ * @method POST
+ * @author unplugin-openapi
+ */
+export function registerUsingPost(
+  body: ExpandRecursively<API.RegisterBody>,
+  options?: { [key: string]: any },
+) {
+  return request.Post<ExpandRecursively<API.RObject_>>('/register', body, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -114,5 +152,12 @@ declare namespace API {
     msg?: string;
   }
 }
+
+type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
+type ExpandRecursively<T> = T extends object
+  ? T extends infer O
+    ? { [K in keyof O]: ExpandRecursively<O[K]> }
+    : never
+  : T;
 "
 `;
