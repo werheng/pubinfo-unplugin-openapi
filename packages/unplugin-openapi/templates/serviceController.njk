@@ -1,12 +1,17 @@
 {{ requestImportStatement }}
 
 {% for api in list -%}
-/** {{ api.desc if api.desc else '此处后端没有提供注释' }} {{api.method | upper}} {{ api.pathInComment | safe }} */
+/**
+ * @description {{ api.desc if api.desc else '此处后端没有提供注释' }}
+ * @url {{ api.pathInComment | safe }}
+ * @method {{api.method | upper}}
+ * @author unplugin-openapi
+ */
 export function {{ api.functionName }}(
 {%- if api.params and api.hasParams %}
   params
   {%- if genType === "ts" -%}
-  : {{namespace}}.{{api.typeName}}
+  : ExpandRecursively<{{namespace}}.{{api.typeName}}>
     {# header 入参 -#}
     {% if api.params.header -%}
     & { // header
@@ -37,7 +42,7 @@ export function {{ api.functionName }}(
     {%- endfor %}
   }
   {%- else -%}
-  {{ api.body.type }}
+  ExpandRecursively<{{ api.body.type }}>
   {%- endif -%}
   {%- endif -%}
   {{ "," if api.file }}
@@ -103,9 +108,9 @@ export function {{ api.functionName }}(
   {% endif -%}
 
   {% if api.hasPathVariables or api.hasApiPrefix -%}
-  return request.{{ api.method | capitalize }}{{ ("<" + api.response.type + ">") | safe if genType === "ts" }}(`{{ api.path | safe }}`,
+  return request.{{ api.method | capitalize }}<ExpandRecursively{{ ("<" + api.response.type + ">") | safe if genType === "ts" }}>(`{{ api.path | safe }}`,
   {% else -%}
-  return request.{{ api.method | capitalize }}{{ ("<" + api.response.type + ">") | safe if genType === "ts" }}('{{ api.path }}',
+  return request.{{ api.method | capitalize }}<ExpandRecursively{{ ("<" + api.response.type + ">") | safe if genType === "ts" }}>('{{ api.path }}',
   {%- endif -%}
     {%- if api.hasFormData -%}
     formData,
