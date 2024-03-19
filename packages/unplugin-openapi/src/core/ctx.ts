@@ -42,7 +42,7 @@ export async function createContext(rawOptions: Options, root = cwd()) {
 
       const openAPI = await getSchema(mergeOptions.input, root)
       if (!openAPI) {
-        consola.warn('openapi config is empty')
+        consola.warn('input is empty')
         return
       }
 
