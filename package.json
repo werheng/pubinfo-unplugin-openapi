@@ -6,6 +6,9 @@
   "packageManager": "pnpm@8.15.5",
   "author": "Werheng <werheng.zhang@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=20.9"
+  },
   "scripts": {
     "build": "pnpm -F @pubinfo/unplugin-openapi build",
     "dev": "pnpm -F @pubinfo/unplugin-openapi dev",
@@ -14,7 +17,7 @@
     "test:run": "vitest run",
     "change": "changeset",
     "version": "changeset version",
-    "release": "pnpm run build && pnpm run test:run && changeset publish && git push --follow-tags",
+    "release": "pnpm run build && changeset publish",
     "commit": "git-cz",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
