@@ -42,7 +42,7 @@ export async function createContext(rawOptions: Options, root = cwd()) {
 
       const openAPI = await getSchema(mergeOptions.input, root)
       if (!openAPI) {
-        consola.warn('input is empty')
+        consola.warn('Input value is empty')
         return
       }
 
@@ -72,7 +72,7 @@ export async function getSchema(schemaPath: string, root: string) {
       return data
     }
     catch (error) {
-      consola.error('fetch openapi error:', error)
+      consola.error('Fetch openapi error:', error)
     }
     return null
   }
