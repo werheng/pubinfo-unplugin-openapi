@@ -1,5 +1,12 @@
 # @pubinfo/unplugin-openapi
 
+## 0.0.10
+
+### Patch Changes
+
+- 59266fe: 修改警告提示信息
+- 08f131e: 优化打印信息
+
 ## 0.0.9
 
 ### Patch Changes
