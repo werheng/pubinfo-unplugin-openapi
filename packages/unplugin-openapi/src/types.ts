@@ -15,7 +15,14 @@ export interface Options {
   enabled?: boolean
 
   /**
-   * 文件 import 内容
+   * 忽略缓存强制生成接口文件
+   *
+   * @default false
+   */
+  force?: boolean
+
+  /**
+   * 文件默认导入
    *
    * @default { '@/api': 'request' } // import request from '@/api'
    *
@@ -33,13 +40,6 @@ export interface Options {
    * 文件输出目录
    */
   output?: string
-
-  /**
-   * 忽略缓存强制生成接口文件
-   *
-   * @default false
-   */
-  force?: boolean
 
   /**
    * 模板文件类型或路径
