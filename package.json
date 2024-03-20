@@ -17,7 +17,7 @@
     "test:run": "vitest run",
     "change": "changeset",
     "version": "changeset version",
-    "release": "pnpm run build && changeset publish --provenance",
+    "release": "pnpm run build && changeset publish",
     "commit": "git-cz",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"

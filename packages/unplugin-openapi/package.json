@@ -5,6 +5,10 @@
   "description": "Generate request files according to the OpenAPI",
   "author": "Werheng <werheng.zhang@gmail.com>",
   "license": "MIT",
+  "repository": "https://github.com/werheng/pubinfo-unplugin-openapi",
+  "bugs": {
+    "url": "https://github.com/werheng/pubinfo-unplugin-openapi/issues"
+  },
   "keywords": [
     "unplugin",
     "vite",
