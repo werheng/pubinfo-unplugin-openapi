@@ -20,8 +20,7 @@ async function main() {
 
   const ctx = await createContext({
     ...config,
-    force: true,
-    enabled: true,
+    cli: true,
   })
 
   if (!ctx.dirs.some(Boolean)) {

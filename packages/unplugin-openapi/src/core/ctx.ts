@@ -23,6 +23,7 @@ export async function createContext(rawOptions: Options, root = cwd()) {
     enabled: true,
     batch: [],
     ...((config && Object.keys(config).length > 0) ? config : rawOptions),
+    cli: rawOptions.cli,
   }
 
   const batch = options.batch.length > 0 ? options.batch : [options]
@@ -37,12 +38,20 @@ export async function createContext(rawOptions: Options, root = cwd()) {
       const mergeOptions = { ...options, ...opt }
       const outputPath = join(root, mergeOptions.output)
 
-      if (!mergeOptions.input || !mergeOptions.enabled)
+      if (mergeOptions?.cli) {
+        await generateOpenAPI(mergeOptions as Required<Options>, root)
+        return
+      }
+
+      if (!mergeOptions.enabled)
+        return
+
+      if (!mergeOptions.input)
         return
 
       const openAPI = await getSchema(mergeOptions.input, root)
       if (!openAPI) {
-        consola.warn('Input value is empty')
+        consola.warn('Fetch OpenAPI failed, value is empty')
         return
       }
 

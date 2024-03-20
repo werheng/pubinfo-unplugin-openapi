@@ -50,4 +50,9 @@ export interface Options {
    * 批量配置
    */
   batch?: Array<Pick<Options, 'imports' | 'input' | 'output'>>
+
+  /**
+   * 是否命令行执行
+   */
+  cli?: boolean
 }
