@@ -59,8 +59,8 @@ importers:
   packages/unplugin-openapi:
     dependencies:
       '@umijs/openapi':
-        specifier: 1.10.1
-        version: 1.10.1
+        specifier: 1.11.1
+        version: 1.11.1
       c12:
         specifier: ^1.9.0
         version: 1.9.0
@@ -3153,8 +3153,8 @@ packages:
       - supports-color
     dev: false
 
-  /@umijs/openapi@1.10.1:
-    resolution: {integrity: sha512-9wfTgJ9ByeOJ2IJVfObeTx1DjNZS/4iLooIv5SJO3pxCi9NUevKkEGkRU2WHmxRwJzkWiQXewnoNkBO/rXHPWw==}
+  /@umijs/openapi@1.11.1:
+    resolution: {integrity: sha512-s5eUvV/j7SPzyWBR4qqKxVTbHofC51aTuGSF2TmqCJwkto9ve9P8Prynuz35JJ6jboPMas0HdYZ1ZskM+WIMAQ==}
     dependencies:
       '@umijs/fabric': 2.14.1
       chalk: 4.1.2
