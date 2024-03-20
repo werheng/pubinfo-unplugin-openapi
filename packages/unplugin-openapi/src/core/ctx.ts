@@ -29,7 +29,7 @@ export async function createContext(rawOptions: Options, root = cwd()) {
   const batch = options.batch.length > 0 ? options.batch : [options]
   const dirs = batch.map(opt => (opt.input || options.input || '').replace(/^\.\/|\.\.\//g, '**/'))
 
-  const { hasCache, setCache, genCacheKey } = createCache({
+  const cache = createCache({
     cacheDir: join(root, 'node_modules/.pubinfo-openapi'),
   }, root)
 
@@ -49,19 +49,23 @@ export async function createContext(rawOptions: Options, root = cwd()) {
       if (!mergeOptions.input)
         return
 
-      const openAPI = await getSchema(mergeOptions.input, root)
-      if (!openAPI) {
-        consola.warn('Fetch OpenAPI failed, value is empty')
+      if (mergeOptions.force) {
+        await generateOpenAPI(mergeOptions as Required<Options>, root)
         return
       }
 
-      const cacheKey = genCacheKey(mergeOptions.input, openAPI)
+      const openAPI = await getSchema(mergeOptions.input, root)
+      if (!openAPI) {
+        consola.warn('Resolve OpenAPI failed, value is empty')
+        return
+      }
 
-      if (hasCache(cacheKey) && existsSync(outputPath) && !mergeOptions.force)
+      const cacheKey = cache.genKey(mergeOptions.input, openAPI)
+      if (cache.has(cacheKey) && existsSync(outputPath))
         return
 
       await generateOpenAPI(mergeOptions as Required<Options>, root)
-      await setCache(cacheKey, openAPI)
+      await cache.set(cacheKey, openAPI)
     }))
   }
 

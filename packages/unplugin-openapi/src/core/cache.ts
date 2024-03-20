@@ -45,5 +45,10 @@ export default function createCache(options: CacheOptions, root: string) {
     hasCache,
     setCache,
     removeCache,
+
+    genKey: genCacheKey,
+    has: hasCache,
+    set: setCache,
+    remove: removeCache,
   }
 }
