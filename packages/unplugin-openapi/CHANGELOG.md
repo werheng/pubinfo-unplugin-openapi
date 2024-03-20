@@ -1,5 +1,12 @@
 # @pubinfo/unplugin-openapi
 
+## 0.1.0
+
+### Minor Changes
+
+- c7b6f70: TS 生成改为仅在开发环境生效
+- f5638d1: 更新 @umijs/openapi 版本, 并移除对 require 的缓存兼容
+
 ## 0.0.10
 
 ### Patch Changes
