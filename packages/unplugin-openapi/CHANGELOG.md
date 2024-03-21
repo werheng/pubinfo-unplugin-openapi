@@ -1,5 +1,12 @@
 # @pubinfo/unplugin-openapi
 
+## 0.1.1
+
+### Patch Changes
+
+- a771ea9: 优化模板生成中的 TS 类型
+- 5cc746b: 解决 cli 指令没有强制生成文件的问题
+
 ## 0.1.0
 
 ### Minor Changes

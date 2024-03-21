@@ -1,7 +1,7 @@
 {
   "name": "@pubinfo/unplugin-openapi",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Generate request files according to the OpenAPI",
   "author": "Werheng <werheng.zhang@gmail.com>",
   "license": "MIT",
