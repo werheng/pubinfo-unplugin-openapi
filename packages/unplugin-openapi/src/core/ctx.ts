@@ -23,7 +23,7 @@ export async function createContext(rawOptions: Options, root = cwd()) {
     enabled: true,
     batch: [],
     ...((config && Object.keys(config).length > 0) ? config : rawOptions),
-    cli: rawOptions.cli,
+    cli: rawOptions.cli || false,
   }
 
   const batch = options.batch.length > 0 ? options.batch : [options]
@@ -34,39 +34,49 @@ export async function createContext(rawOptions: Options, root = cwd()) {
   }, root)
 
   async function generateTS() {
-    await Promise.all(batch.map(async (opt) => {
-      const mergeOptions = { ...options, ...opt }
-      const outputPath = join(root, mergeOptions.output)
+    if (batch.length === 0)
+      return
 
-      if (mergeOptions?.cli) {
-        await generateOpenAPI(mergeOptions as Required<Options>, root)
+    const tasks = batch.map(async (o) => {
+      const opt = { ...options, ...o }
+      const outputPath = join(root, opt.output)
+
+      if (opt?.cli) {
+        await generateOpenAPI(opt as Required<Options>, root)
         return
       }
 
-      if (!mergeOptions.enabled)
+      if (!opt.enabled)
         return
 
-      if (!mergeOptions.input)
+      if (!opt.input)
         return
 
-      if (mergeOptions.force) {
-        await generateOpenAPI(mergeOptions as Required<Options>, root)
+      if (opt.force) {
+        await generateOpenAPI(opt as Required<Options>, root)
         return
       }
 
-      const openAPI = await getSchema(mergeOptions.input, root)
+      const openAPI = await getSchema(opt.input, root)
       if (!openAPI) {
         consola.warn('Resolve OpenAPI failed, value is empty')
         return
       }
 
-      const cacheKey = cache.genKey(mergeOptions.input, openAPI)
+      const cacheKey = cache.genKey(opt.input, openAPI)
       if (cache.has(cacheKey) && existsSync(outputPath))
         return
 
-      await generateOpenAPI(mergeOptions as Required<Options>, root)
+      await generateOpenAPI(opt as Required<Options>, root)
       await cache.set(cacheKey, openAPI)
-    }))
+    })
+
+    try {
+      await Promise.all(tasks)
+    }
+    catch (error) {
+      consola.error('An error occurred while processing tasks:', error)
+    }
   }
 
   return {
