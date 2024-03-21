@@ -9,9 +9,12 @@ exports[`generate > should generate by openapi.json 1`] = `
  * @method GET
  * @author unplugin-openapi
  */
-export function save(params: ExpandRecursively<API.saveParams>, options?: { [key: string]: any }) {
+export function save<R = API.ResponseData, T = API.ResponseData>(
+  params: ExpandRecursively<API.saveParams>,
+  options?: Parameters<typeof request.Get<R, T>>[1],
+) {
   const { id: param0, ...queryParams } = params;
-  return request.Get<ExpandRecursively<API.ResponseData>>(\`/address/category/\${param0}\`, {
+  return request.Get<R, T>(\`/address/category/\${param0}\`, {
     params: { ...queryParams },
     ...(options || {}),
   });
@@ -61,11 +64,11 @@ exports[`generate > should generate by swagger.json 1`] = `
  * @method POST
  * @author unplugin-openapi
  */
-export function loginUsingPost(
+export function loginUsingPost<R = API.RObject_, T = API.RObject_>(
   body: ExpandRecursively<API.LoginBody>,
-  options?: { [key: string]: any },
+  options?: Parameters<typeof request.Post<R, T>>[2],
 ) {
-  return request.Post<ExpandRecursively<API.RObject_>>('/login', body, {
+  return request.Post<R, T>('/login', body, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -79,8 +82,10 @@ export function loginUsingPost(
  * @method DELETE
  * @author unplugin-openapi
  */
-export function logoutUsingDelete(options?: { [key: string]: any }) {
-  return request.Delete<ExpandRecursively<API.RObject_>>(
+export function logoutUsingDelete<R = API.RObject_, T = API.RObject_>(
+  options?: Parameters<typeof request.Delete<R, T>>[2],
+) {
+  return request.Delete<R, T>(
     '/logout',
     {},
     {
@@ -95,8 +100,10 @@ export function logoutUsingDelete(options?: { [key: string]: any }) {
  * @method POST
  * @author unplugin-openapi
  */
-export function refreshUsingPost(options?: { [key: string]: any }) {
-  return request.Post<ExpandRecursively<API.RObject_>>(
+export function refreshUsingPost<R = API.RObject_, T = API.RObject_>(
+  options?: Parameters<typeof request.Post<R, T>>[2],
+) {
+  return request.Post<R, T>(
     '/refresh',
     {},
     {
@@ -111,11 +118,11 @@ export function refreshUsingPost(options?: { [key: string]: any }) {
  * @method POST
  * @author unplugin-openapi
  */
-export function registerUsingPost(
+export function registerUsingPost<R = API.RObject_, T = API.RObject_>(
   body: ExpandRecursively<API.RegisterBody>,
-  options?: { [key: string]: any },
+  options?: Parameters<typeof request.Post<R, T>>[2],
 ) {
-  return request.Post<ExpandRecursively<API.RObject_>>('/register', body, {
+  return request.Post<R, T>('/register', body, {
     headers: {
       'Content-Type': 'application/json',
     },

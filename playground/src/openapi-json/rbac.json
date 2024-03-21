@@ -1,0 +1,2579 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "rbac相关接口",
+    "description": "接口文档描述",
+    "contact": {},
+    "license": {},
+    "version": "v1.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:9099/pubinfo-sys",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/rbac/user/resetPassword": {
+      "put": {
+        "tags": [
+          "用户接口"
+        ],
+        "summary": "重置登录密码",
+        "operationId": "changePassword",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "用户id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/user/changePassword": {
+      "put": {
+        "tags": [
+          "用户接口"
+        ],
+        "summary": "修改登录密码",
+        "operationId": "changePassword_1",
+        "parameters": [
+          {
+            "name": "oldPassword",
+            "in": "query",
+            "description": "原密码(使用公钥加密)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "newPassword",
+            "in": "query",
+            "description": "新密码(使用公钥加密)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/user/userUpdate": {
+      "post": {
+        "tags": [
+          "用户接口"
+        ],
+        "summary": "用户编辑",
+        "operationId": "userUpdate",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubUserUpdateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/user/userPage": {
+      "post": {
+        "tags": [
+          "用户接口"
+        ],
+        "summary": "用户分页查询",
+        "operationId": "userPage",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubUserQueryDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPageDataPubUserVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/user/pubUserAdd": {
+      "post": {
+        "tags": [
+          "用户接口"
+        ],
+        "summary": "用户新增",
+        "operationId": "pubUserAdd",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubUserAddDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataString"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/role/roleUpdate": {
+      "post": {
+        "tags": [
+          "角色接口"
+        ],
+        "summary": "角色编辑",
+        "operationId": "roleUpdate",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubRoleUpdateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubRoleVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/role/rolePage": {
+      "post": {
+        "tags": [
+          "角色接口"
+        ],
+        "summary": "角色分页查询",
+        "operationId": "rolePage",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubRoleQueryDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPageDataPubRoleVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/role/addRole": {
+      "post": {
+        "tags": [
+          "角色接口"
+        ],
+        "summary": "角色新增",
+        "operationId": "addRole",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubRoleAddDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubRoleVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/resource/resourceUpdate": {
+      "post": {
+        "tags": [
+          "资源接口"
+        ],
+        "summary": "资源编辑",
+        "operationId": "resourceUpdate",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubResourceUpdateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubResourceVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/resource/menuTree": {
+      "post": {
+        "tags": [
+          "资源接口"
+        ],
+        "summary": "登录后菜单树加载",
+        "operationId": "menuTree",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataListPubResourceTreeVo"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/rbac/resource/addResource": {
+      "post": {
+        "tags": [
+          "资源接口"
+        ],
+        "summary": "资源新增",
+        "operationId": "addResource",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubResourceAddDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubResourceVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/org/updateOrg": {
+      "post": {
+        "tags": [
+          "组织接口"
+        ],
+        "summary": "修改",
+        "operationId": "updateOrg",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubOrgUpdateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubOrgVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/org/addOrg": {
+      "post": {
+        "tags": [
+          "组织接口"
+        ],
+        "summary": "新增",
+        "operationId": "addOrg",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PubOrgAddDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubOrgVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/user/userEntireInfo": {
+      "get": {
+        "tags": [
+          "用户接口"
+        ],
+        "summary": "登录用户完整信息",
+        "operationId": "getUserEntireInfo",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubUserEntireVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/user/userDelete": {
+      "get": {
+        "tags": [
+          "用户接口"
+        ],
+        "summary": "用户删除",
+        "operationId": "userDelete",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "用户id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgId",
+            "in": "query",
+            "description": "组织id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/user/info": {
+      "get": {
+        "tags": [
+          "用户接口"
+        ],
+        "summary": "根据id查询",
+        "operationId": "getUserInfoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "用户id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubUserInfoVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/role/roleList": {
+      "get": {
+        "tags": [
+          "角色接口"
+        ],
+        "summary": "角色不分页查询",
+        "operationId": "roleList",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataListPairString"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/role/roleDelete": {
+      "get": {
+        "tags": [
+          "角色接口"
+        ],
+        "summary": "角色删除",
+        "operationId": "roleDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "角色id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/role/info": {
+      "get": {
+        "tags": [
+          "角色接口"
+        ],
+        "summary": "根据id查询",
+        "operationId": "getRoleInfoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "角色id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubRoleResourceMenuTreeVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/role/groupResourceTree": {
+      "get": {
+        "tags": [
+          "角色接口"
+        ],
+        "summary": "选择应用下的资源树",
+        "operationId": "groupResourceTree",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "query",
+            "description": "应用id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataListPubResourceTreeVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/role/groupResourceList": {
+      "get": {
+        "tags": [
+          "角色接口"
+        ],
+        "summary": "应用列表",
+        "operationId": "groupResourceList",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataListPubResourceVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/resource/resourceTree": {
+      "get": {
+        "tags": [
+          "资源接口"
+        ],
+        "summary": "全量树",
+        "operationId": "resourceTree",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataListPubResourceTreeVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/resource/resourceListByParentId": {
+      "get": {
+        "tags": [
+          "资源接口"
+        ],
+        "summary": "资源列表通过父id查询",
+        "operationId": "resourceListByPid",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "父级id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataListPubResourceVo"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/rbac/resource/resourceDelete": {
+      "get": {
+        "tags": [
+          "资源接口"
+        ],
+        "summary": "资源删除",
+        "operationId": "resourceDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "资源id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/resource/info": {
+      "get": {
+        "tags": [
+          "资源接口"
+        ],
+        "summary": "根据id查询",
+        "operationId": "getResourceInfoById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "资源id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubResourceVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/resource/grantedResources": {
+      "get": {
+        "tags": [
+          "资源接口"
+        ],
+        "summary": "授权资源列表",
+        "operationId": "grantedResources",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataListString"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/resource/getRoleListByResourceId": {
+      "get": {
+        "tags": [
+          "资源接口"
+        ],
+        "summary": "资源绑定的角色列表",
+        "operationId": "getRoleListByResourceId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "资源id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataListPubRoleVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/org/orgListByParentId": {
+      "get": {
+        "tags": [
+          "组织接口"
+        ],
+        "summary": "组织列表查询通过父id",
+        "description": "顶级id:0",
+        "operationId": "orgListByPid",
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "父级id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataListPubOrgVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/org/info": {
+      "get": {
+        "tags": [
+          "组织接口"
+        ],
+        "summary": "根据id查询",
+        "operationId": "getOrgById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "组织id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataPubOrgVo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rbac/org/deleteOrg": {
+      "get": {
+        "tags": [
+          "组织接口"
+        ],
+        "summary": "删除",
+        "operationId": "deleteOrg",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "组织id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDataVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ResponseDataVoid": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubUserUpdateDto": {
+        "required": [
+          "id",
+          "orgRoles"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "loginPassword": {
+            "type": "string",
+            "description": "登录密码"
+          },
+          "realName": {
+            "type": "string",
+            "description": "真实姓名"
+          },
+          "sex": {
+            "type": "string",
+            "description": "性别 0:未知,1：男，2:女"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "昵称"
+          },
+          "mobile": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "address": {
+            "type": "string",
+            "description": "联系地址"
+          },
+          "idCard": {
+            "type": "string",
+            "description": "身份证号码"
+          },
+          "userPic": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "电子邮箱"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "orgRoles": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "用户绑定的组织和角色",
+            "items": {
+              "$ref": "#/components/schemas/UserAddRoleInnerDto"
+            }
+          }
+        },
+        "description": "用户更新dto"
+      },
+      "UserAddRoleInnerDto": {
+        "required": [
+          "roleIds"
+        ],
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string",
+            "description": "组织id"
+          },
+          "roleIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "角色id集合",
+            "items": {
+              "type": "string",
+              "description": "角色id集合"
+            }
+          },
+          "current": {
+            "type": "boolean",
+            "description": "多个组织时,是否为主要组织,只能有一个"
+          }
+        },
+        "description": "用户新增绑定组织和角色dto"
+      },
+      "PubUserQueryDto": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "doSearchTotal": {
+            "type": "boolean"
+          },
+          "orgId": {
+            "type": "string",
+            "description": "组织id"
+          },
+          "userName": {
+            "type": "string",
+            "description": "用户名"
+          }
+        }
+      },
+      "PageDataPubUserVo": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "doSearchTotal": {
+            "type": "boolean"
+          },
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PubUserVo"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PubUserVo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "用户id"
+          },
+          "orgId": {
+            "type": "string",
+            "description": "所属组织，当前为组织"
+          },
+          "orgName": {
+            "type": "string",
+            "description": "所属组织名称"
+          },
+          "loginName": {
+            "type": "string",
+            "description": "登录账号"
+          },
+          "realName": {
+            "type": "string",
+            "description": "真实姓名"
+          },
+          "sex": {
+            "type": "string",
+            "description": "性别 0:未知,1：男，2:女"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "昵称"
+          },
+          "mobile": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "address": {
+            "type": "string",
+            "description": "联系地址"
+          },
+          "idCard": {
+            "type": "string",
+            "description": "身份证号码"
+          },
+          "userPic": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "电子邮箱"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          }
+        },
+        "description": "用户vo"
+      },
+      "ResponseDataPageDataPubUserVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageDataPubUserVo"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubUserAddDto": {
+        "required": [
+          "orgRoles"
+        ],
+        "type": "object",
+        "properties": {
+          "loginName": {
+            "type": "string",
+            "description": "登录账号"
+          },
+          "loginPassword": {
+            "type": "string",
+            "description": "登录密码"
+          },
+          "realName": {
+            "type": "string",
+            "description": "真实姓名"
+          },
+          "sex": {
+            "type": "string",
+            "description": "性别 0:未知,1：男，2:女"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "昵称"
+          },
+          "mobile": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "address": {
+            "type": "string",
+            "description": "联系地址"
+          },
+          "idCard": {
+            "type": "string",
+            "description": "身份证号码"
+          },
+          "userPic": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "电子邮箱"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "orgRoles": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "用户绑定的组织和角色",
+            "items": {
+              "$ref": "#/components/schemas/UserAddRoleInnerDto"
+            }
+          }
+        }
+      },
+      "ResponseDataString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubRoleUpdateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "主键id"
+          },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "viewScope": {
+            "type": "string",
+            "description": "可见范围: 1-仅自己;2-全部可见"
+          },
+          "resourceIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "资源id集合",
+            "items": {
+              "type": "string",
+              "description": "资源id集合"
+            }
+          }
+        },
+        "description": "角色更新dto"
+      },
+      "PubRoleVo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "主键id"
+          },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "编码(唯一)"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用:0否1是"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "viewScope": {
+            "type": "string",
+            "description": "可见范围: 1-仅自己;2-全部可见"
+          },
+          "createOrgId": {
+            "type": "string",
+            "description": "创建组织id"
+          },
+          "createOrgName": {
+            "type": "string",
+            "description": "创建组织名称"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "createUserName": {
+            "type": "string",
+            "description": "创建人姓名"
+          },
+          "appId": {
+            "type": "string",
+            "description": "应用id"
+          },
+          "appName": {
+            "type": "string",
+            "description": "应用名称"
+          }
+        },
+        "description": "角色vo"
+      },
+      "ResponseDataPubRoleVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PubRoleVo"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubRoleQueryDto": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "doSearchTotal": {
+            "type": "boolean"
+          }
+        },
+        "description": "角色查询dto"
+      },
+      "PageDataPubRoleVo": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "doSearchTotal": {
+            "type": "boolean"
+          },
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PubRoleVo"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ResponseDataPageDataPubRoleVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageDataPubRoleVo"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubRoleAddDto": {
+        "required": [
+          "resourceIds"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "编码(唯一)"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "viewScope": {
+            "type": "string",
+            "description": "可见范围: 1-仅自己;2-全部可见"
+          },
+          "resourceIds": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "资源id集合",
+            "items": {
+              "type": "string",
+              "description": "资源id集合"
+            }
+          },
+          "appId": {
+            "type": "string",
+            "description": "应用id"
+          }
+        },
+        "description": "角色新增dto"
+      },
+      "PubResourceUpdateDto": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "资源名称"
+          },
+          "type": {
+            "type": "string",
+            "description": "资源类型，1-应用,2-目录,3-菜单,4-按钮,5-非菜单页"
+          },
+          "description": {
+            "type": "string",
+            "description": "资源描述"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "icon": {
+            "type": "string",
+            "description": "图标"
+          },
+          "link": {
+            "type": "boolean",
+            "description": "是否外链"
+          },
+          "outLink": {
+            "type": "string",
+            "description": "外链地址"
+          },
+          "permissionCode": {
+            "type": "string",
+            "description": "权限码，多个以逗号分隔"
+          }
+        }
+      },
+      "PubResourceVo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "父级id"
+          },
+          "name": {
+            "type": "string",
+            "description": "资源名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "资源编码"
+          },
+          "leaf": {
+            "type": "boolean",
+            "description": "是否叶子节点"
+          },
+          "type": {
+            "type": "string",
+            "description": "资源类型，1-应用,2-目录,3-菜单,4-按钮,5-非菜单页"
+          },
+          "description": {
+            "type": "string",
+            "description": "资源描述"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "icon": {
+            "type": "string",
+            "description": "图标"
+          },
+          "link": {
+            "type": "boolean",
+            "description": "是否外链"
+          },
+          "outLink": {
+            "type": "string",
+            "description": "外链地址"
+          },
+          "permissionCode": {
+            "type": "string",
+            "description": "权限码，多个以逗号分隔"
+          }
+        },
+        "description": "资源vo"
+      },
+      "ResponseDataPubResourceVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PubResourceVo"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubResourceTreeVo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "父级id"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "name": {
+            "type": "string",
+            "description": "资源名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "资源编码"
+          },
+          "leaf": {
+            "type": "boolean",
+            "description": "是否叶子节点"
+          },
+          "type": {
+            "type": "string",
+            "description": "资源类型，1-应用,2-目录,3-菜单,4-按钮,5-非菜单页"
+          },
+          "description": {
+            "type": "string",
+            "description": "资源描述"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "icon": {
+            "type": "string",
+            "description": "图标"
+          },
+          "link": {
+            "type": "boolean",
+            "description": "是否外链"
+          },
+          "outLink": {
+            "type": "string",
+            "description": "外链地址"
+          },
+          "permissionCode": {
+            "type": "string",
+            "description": "权限码，多个以逗号分隔"
+          },
+          "selected": {
+            "type": "boolean",
+            "description": "是否被选择"
+          },
+          "children": {
+            "type": "array",
+            "description": "子节点",
+            "items": {
+              "$ref": "#/components/schemas/PubResourceTreeVo"
+            }
+          }
+        },
+        "description": "菜单树vo"
+      },
+      "ResponseDataListPubResourceTreeVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PubResourceTreeVo"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubResourceAddDto": {
+        "required": [
+          "name",
+          "parentId"
+        ],
+        "type": "object",
+        "properties": {
+          "parentId": {
+            "type": "string",
+            "description": "父级id"
+          },
+          "name": {
+            "type": "string",
+            "description": "资源名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "资源编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "资源类型，1-应用,2-目录,3-菜单,4-按钮,5-非菜单页"
+          },
+          "description": {
+            "type": "string",
+            "description": "资源描述"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "icon": {
+            "type": "string",
+            "description": "图标"
+          },
+          "link": {
+            "type": "boolean",
+            "description": "是否外链"
+          },
+          "outLink": {
+            "type": "string",
+            "description": "外链地址"
+          },
+          "permissionCode": {
+            "type": "string",
+            "description": "权限码，多个以逗号分隔"
+          }
+        },
+        "description": "资源新增DTO"
+      },
+      "PubOrgUpdateDto": {
+        "required": [
+          "district",
+          "enable",
+          "id",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "id"
+          },
+          "name": {
+            "type": "string",
+            "description": "组织名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "组织编码"
+          },
+          "areaCode": {
+            "type": "string",
+            "description": "行政区划编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "组织类型"
+          },
+          "district": {
+            "type": "boolean",
+            "description": "是否行政区划"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "creditCode": {
+            "type": "string",
+            "description": "统一社会信用代码"
+          },
+          "contactPerson": {
+            "type": "string",
+            "description": "联系人"
+          },
+          "contactMobile": {
+            "type": "string",
+            "description": "联系方式"
+          }
+        },
+        "description": "组织更新DTO"
+      },
+      "PubOrgVo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "主键"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "父级id"
+          },
+          "name": {
+            "type": "string",
+            "description": "组织名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "组织编码"
+          },
+          "areaCode": {
+            "type": "string",
+            "description": "行政区划编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "组织类型"
+          },
+          "district": {
+            "type": "boolean",
+            "description": "是否行政区划，0：否，1：是"
+          },
+          "leaf": {
+            "type": "boolean",
+            "description": "是否叶子节点"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "creditCode": {
+            "type": "string",
+            "description": "统一社会信用代码"
+          },
+          "contactPerson": {
+            "type": "string",
+            "description": "联系人"
+          },
+          "contactMobile": {
+            "type": "string",
+            "description": "联系方式"
+          }
+        },
+        "description": "组织vo"
+      },
+      "ResponseDataPubOrgVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PubOrgVo"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubOrgAddDto": {
+        "required": [
+          "district",
+          "enable",
+          "parentId",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "parentId": {
+            "type": "string",
+            "description": "父级id"
+          },
+          "name": {
+            "type": "string",
+            "description": "组织名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "组织编码"
+          },
+          "areaCode": {
+            "type": "string",
+            "description": "行政区划编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "组织类型"
+          },
+          "district": {
+            "type": "boolean",
+            "description": "是否行政区划"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "creditCode": {
+            "type": "string",
+            "description": "统一社会信用代码"
+          },
+          "contactPerson": {
+            "type": "string",
+            "description": "联系人"
+          },
+          "contactMobile": {
+            "type": "string",
+            "description": "联系方式"
+          }
+        },
+        "description": "组织新增DTO"
+      },
+      "PubUserEntireVo": {
+        "type": "object",
+        "properties": {
+          "pubUserVo": {
+            "$ref": "#/components/schemas/PubUserVo"
+          },
+          "pubOrgVoList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PubOrgVo"
+            }
+          }
+        },
+        "description": "用户全部信息Vo"
+      },
+      "ResponseDataPubUserEntireVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PubUserEntireVo"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubRoleInnerUserVo": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "string",
+            "description": "主键id"
+          },
+          "roleName": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "编码(唯一)"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "createOrgId": {
+            "type": "string",
+            "description": "创建组织id"
+          },
+          "createOrgName": {
+            "type": "string",
+            "description": "创建组织名称"
+          }
+        },
+        "description": "角色信息、用户信息Vo"
+      },
+      "PubUserInfoVo": {
+        "required": [
+          "orgRoles"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "用户id"
+          },
+          "loginName": {
+            "type": "string",
+            "description": "登录账号"
+          },
+          "realName": {
+            "type": "string",
+            "description": "真实姓名"
+          },
+          "sex": {
+            "type": "string",
+            "description": "性别 0:未知,1：男，2:女"
+          },
+          "nickName": {
+            "type": "string",
+            "description": "昵称"
+          },
+          "mobile": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "address": {
+            "type": "string",
+            "description": "联系地址"
+          },
+          "idCard": {
+            "type": "string",
+            "description": "身份证号码"
+          },
+          "userPic": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "电子邮箱"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "orgRoles": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "用户绑定的组织和角色",
+            "items": {
+              "$ref": "#/components/schemas/UserInfoOrgRoleInnerVo"
+            }
+          }
+        },
+        "description": "用户信息Vo"
+      },
+      "ResponseDataPubUserInfoVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PubUserInfoVo"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UserInfoOrgRoleInnerVo": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "string",
+            "description": "组织id"
+          },
+          "orgName": {
+            "type": "string",
+            "description": "组织名称"
+          },
+          "current": {
+            "type": "boolean",
+            "description": "多个组织时,是否为主要组织,只能有一个"
+          },
+          "roleVos": {
+            "uniqueItems": true,
+            "type": "array",
+            "description": "角色集合",
+            "items": {
+              "$ref": "#/components/schemas/PubRoleInnerUserVo"
+            }
+          }
+        },
+        "description": "用户信息、组织、角色信息Vo"
+      },
+      "PairString": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseDataListPairString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PairString"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PubRoleResourceMenuTreeVo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "主键id"
+          },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "编码(唯一)"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "enable": {
+            "type": "boolean",
+            "description": "是否启用:0否1是"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序",
+            "format": "float"
+          },
+          "viewScope": {
+            "type": "string",
+            "description": "可见范围: 1-仅自己;2-全部可见"
+          },
+          "createOrgId": {
+            "type": "string",
+            "description": "创建组织id"
+          },
+          "createOrgName": {
+            "type": "string",
+            "description": "创建组织名称"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "createUserName": {
+            "type": "string",
+            "description": "创建人姓名"
+          },
+          "appId": {
+            "type": "string",
+            "description": "应用id"
+          },
+          "appName": {
+            "type": "string",
+            "description": "应用名称"
+          },
+          "resourceTree": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PubResourceTreeVo"
+            }
+          },
+          "resourceIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ResponseDataPubRoleResourceMenuTreeVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PubRoleResourceMenuTreeVo"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponseDataListPubResourceVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PubResourceVo"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponseDataListString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponseDataListPubRoleVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PubRoleVo"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponseDataListPubOrgVo": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PubOrgVo"
+            }
+          },
+          "success": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "x-openapi": {
+    "x-setting": {
+      "customCode": 200,
+      "language": "zh-CN",
+      "enableSwaggerModels": true,
+      "swaggerModelName": "实体类列表",
+      "enableReloadCacheParameter": false,
+      "enableAfterScript": true,
+      "enableDocumentManage": true,
+      "enableVersion": false,
+      "enableRequestCache": true,
+      "enableFilterMultipartApis": false,
+      "enableFilterMultipartApiMethodType": "POST",
+      "enableHost": false,
+      "enableHostText": "",
+      "enableDynamicParameter": true,
+      "enableDebug": true,
+      "enableFooter": true,
+      "enableFooterCustom": false,
+      "enableSearch": true,
+      "enableOpenApi": true,
+      "enableHomeCustom": false,
+      "enableGroup": true,
+      "enableResponseCode": true
+    },
+    "x-markdownFiles": []
+  }
+}

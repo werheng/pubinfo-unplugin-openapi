@@ -12,7 +12,7 @@
   "scripts": {
     "build": "pnpm -F @pubinfo/unplugin-openapi build",
     "dev": "pnpm -F @pubinfo/unplugin-openapi dev",
-    "play": "npm -C playground run dev",
+    "play": "pnpm -F playground dev",
     "test": "vitest",
     "test:run": "vitest run",
     "change": "changeset",

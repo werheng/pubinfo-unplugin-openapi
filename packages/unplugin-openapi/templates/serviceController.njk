@@ -7,7 +7,7 @@
  * @method {{api.method | upper}}
  * @author unplugin-openapi
  */
-export function {{ api.functionName }}(
+export function {{ api.functionName }}{{("<R =" + api.response.type + ", T =" + api.response.type + ">") | safe if genType === "ts"}}(
 {%- if api.params and api.hasParams %}
   params
   {%- if genType === "ts" -%}
@@ -58,7 +58,7 @@ export function {{ api.functionName }}(
 {%- endfor -%}
 {%- endif -%}
 {{ "," if api.body or api.hasParams or api.file }}
-  options {{ ("?: " + requestOptionsType) if genType === "ts" }}
+  options {{ ("?: Parameters<typeof request." +  (api.method | capitalize) + "<R, T>>[" + ("2" if api.method !== "get" and api.method !== "head" and api.method !== "options" else "1") + "]") if genType === "ts" }}
 ) {
   {% if api.params and api.params.path -%}
   const { {% for param in api.params.path %}'{{ param.name }}': {{ param.alias }}, {% endfor %}
@@ -108,9 +108,9 @@ export function {{ api.functionName }}(
   {% endif -%}
 
   {% if api.hasPathVariables or api.hasApiPrefix -%}
-  return request.{{ api.method | capitalize }}<ExpandRecursively{{ ("<" + api.response.type + ">") | safe if genType === "ts" }}>(`{{ api.path | safe }}`,
+  return request.{{ api.method | capitalize }}<R, T>(`{{ api.path | safe }}`,
   {% else -%}
-  return request.{{ api.method | capitalize }}<ExpandRecursively{{ ("<" + api.response.type + ">") | safe if genType === "ts" }}>('{{ api.path }}',
+  return request.{{ api.method | capitalize }}<R, T>('{{ api.path }}',
   {%- endif -%}
     {%- if api.hasFormData -%}
     formData,
