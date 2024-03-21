@@ -41,11 +41,6 @@ export default function createCache(options: CacheOptions, root: string) {
   }
 
   return {
-    genCacheKey,
-    hasCache,
-    setCache,
-    removeCache,
-
     genKey: genCacheKey,
     has: hasCache,
     set: setCache,

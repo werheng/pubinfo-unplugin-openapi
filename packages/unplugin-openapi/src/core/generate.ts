@@ -1,5 +1,6 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { stat } from 'node:fs/promises'
 import { generateService as gen } from '@umijs/openapi'
 import { genImport } from 'knitwork'
 import type { Options } from '../types'
@@ -16,9 +17,18 @@ export async function generateOpenAPI(
   const projectName = outputStrs.pop()
   const serversPath = outputStrs.join('/')
 
+  let templatesFolder = join(__dirname, '../templates')
+
+  try {
+    await stat(templatesFolder)
+  }
+  catch (error) {
+    templatesFolder = join(__dirname, '../../templates')
+  }
+
   await gen({
     requestLibPath: Object.keys(imports).map(key => genImport(key, imports[key])).join('\n'),
-    templatesFolder: join(__dirname, '../templates'),
+    templatesFolder,
     serversPath: join(root, serversPath),
     projectName,
     schemaPath: input?.startsWith('http') ? input : join(root, input),

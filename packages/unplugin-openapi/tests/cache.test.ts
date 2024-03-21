@@ -15,9 +15,9 @@ describe('cache', async () => {
     output: './tests/outputs/cache',
   }
   const { generateTS } = await createContext(options, root)
-  const { hasCache, genCacheKey, removeCache } = createCache({ cacheDir }, root)
+  const cache = createCache({ cacheDir }, root)
   const openAPI = await getSchema(options.input, root)
-  const cacheKey = genCacheKey(options.input, openAPI!)
+  const cacheKey = cache.genKey(options.input, openAPI!)
 
   // clear cache
   if (existsSync(cacheDir))
@@ -25,11 +25,11 @@ describe('cache', async () => {
 
   it('should cache', async () => {
     await generateTS()
-    expect(hasCache(cacheKey)).toBe(true)
+    expect(cache.has(cacheKey)).toBe(true)
   })
 
   it('should not cache', async () => {
-    await removeCache(cacheKey)
-    expect(hasCache(cacheKey)).toBe(false)
+    await cache.remove(cacheKey)
+    expect(cache.has(cacheKey)).toBe(false)
   })
 })
