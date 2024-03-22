@@ -23,7 +23,7 @@ export async function createContext(rawOptions: Options, root = cwd()) {
     enabled: true,
     batch: [],
     ...((config && Object.keys(config).length > 0) ? config : rawOptions),
-    cli: rawOptions.cli || false,
+    cli: rawOptions?.cli || false,
   }
 
   const batch = options.batch.length > 0 ? options.batch : [options]
