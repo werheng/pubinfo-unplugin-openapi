@@ -26,7 +26,7 @@ pnpm install @pubinfo/unplugin-openapi -D
 Need config file in your project root directory:
 
 ```js
-// openapi.config.js
+// openapi.config.js / openapi.config.ts
 export default {
   /* options */
 }
