@@ -1,5 +1,11 @@
 # @pubinfo/unplugin-openapi
 
+## 0.2.1
+
+### Patch Changes
+
+- 93aaa0f: 解决配置项对 cli 没有判空校验的问题
+
 ## 0.2.0
 
 ### Minor Changes
