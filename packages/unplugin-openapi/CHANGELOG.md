@@ -1,5 +1,11 @@
 # @pubinfo/unplugin-openapi
 
+## 0.2.0
+
+### Minor Changes
+
+- 5c0b3a4: 修改 cli 生成的指令参数
+
 ## 0.1.1
 
 ### Patch Changes
