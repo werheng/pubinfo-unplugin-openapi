@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "openapi": "openapi"
+    "gen": "generate"
   },
   "dependencies": {
     "@alova/adapter-axios": "^1.2.3",

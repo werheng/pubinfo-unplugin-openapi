@@ -35,7 +35,7 @@ export default {
 and then run:
 
 ```bash
-npx @pubinfo/unplugin-openapi openapi
+npx @pubinfo/unplugin-openapi generate
 ```
 
 ### Plugin Usage

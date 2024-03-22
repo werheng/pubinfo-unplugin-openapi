@@ -84,7 +84,7 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "openapi": "./dist/cli.js"
+    "generate": "./dist/cli.js"
   },
   "files": [
     "*.d.ts",
